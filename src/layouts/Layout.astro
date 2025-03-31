@@ -1,14 +1,68 @@
-<!doctype html>
-<html lang="en">
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+export interface Props {
+	title: string;
+	description?: string;
+}
+
+const { title, description = 'Blog sobre agroecología y agricultura sostenible en Colombia' } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="es">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		<meta name="description" content={description} />
+		<title>{title} | AgroECo Colombia</title>
+		
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+		
+		<!-- AOS Animation Library -->
+		<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+		
+		<!-- Netlify Identity -->
+		<script src="https://identity.netlify.com/v1/netlify-identity-widget.js" is:inline></script>
 	</head>
 	<body>
-		<slot />
+		<Header />
+		
+		<main>
+			<slot />
+		</main>
+		
+		<Footer />
+		
+		<!-- AOS Init -->
+		<script is:inline src="https://unpkg.com/aos@next/dist/aos.js"></script>
+		<script is:inline>
+			document.addEventListener('DOMContentLoaded', () => {
+				AOS.init({
+					duration: 800,
+					once: true,
+					offset: 100,
+				});
+			});
+			
+			// Netlify CMS Redirect
+			if (window.netlifyIdentity) {
+				window.netlifyIdentity.on("init", user => {
+					if (!user) {
+						window.netlifyIdentity.on("login", () => {
+							document.location.href = "/admin/";
+						});
+					}
+				});
+			}
+		</script>
 	</body>
 </html>
 

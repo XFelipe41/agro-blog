@@ -1,0 +1,68 @@
+---
+export interface Props {
+  article: {
+    title: string;
+    slug: string;
+    date: Date;
+    image: string;
+    description: string;
+    category: string;
+    tags?: string[];
+  };
+}
+
+const { article } = Astro.props;
+
+// Formatear la fecha
+const formattedDate = new Intl.DateTimeFormat('es-ES', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric'
+}).format(article.date);
+---
+
+<article class="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up">
+  <a href={`/articulos/${article.slug}`} class="block">
+    <div class="relative h-48 overflow-hidden">
+      <img 
+        src={article.image} 
+        alt={article.title} 
+        class="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
+      />
+      <div class="absolute top-4 left-4">
+        <span class="bg-primary-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
+          {article.category}
+        </span>
+      </div>
+    </div>
+    
+    <div class="p-6">
+      <time datetime={article.date.toISOString()} class="text-sm text-gray-500 mb-2 block">
+        {formattedDate}
+      </time>
+      
+      <h3 class="text-xl font-bold mb-2 text-gray-900 hover:text-primary-600 transition-colors">
+        {article.title}
+      </h3>
+      
+      <p class="text-gray-600 mb-4 line-clamp-3">
+        {article.description}
+      </p>
+      
+      <div class="flex justify-between items-center">
+        <div class="flex gap-2 flex-wrap">
+          {article.tags && article.tags.slice(0, 2).map((tag) => (
+            <span class="text-xs text-gray-500">#{tag}</span>
+          ))}
+        </div>
+        
+        <span class="text-primary-600 font-medium text-sm inline-flex items-center group">
+          Leer más
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+          </svg>
+        </span>
+      </div>
+    </div>
+  </a>
+</article> 

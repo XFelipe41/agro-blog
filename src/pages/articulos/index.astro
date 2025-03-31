@@ -1,0 +1,129 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+
+// Artículos de ejemplo mientras no tengamos contenido real
+const demoArticles = [
+  {
+    title: 'Prácticas agroecológicas para pequeños agricultores',
+    slug: 'practicas-agroecologicas',
+    date: new Date('2023-11-15'),
+    image: '/images/uploads/demo-article-1.jpg',
+    description: 'Descubre cómo implementar prácticas agroecológicas en pequeñas parcelas para maximizar la producción sostenible.',
+    category: 'Agroecología',
+    tags: ['agroecología', 'agricultura sostenible', 'pequeños agricultores']
+  },
+  {
+    title: 'Los beneficios de la permacultura en zonas tropicales',
+    slug: 'beneficios-permacultura-zonas-tropicales',
+    date: new Date('2023-12-05'),
+    image: '/images/uploads/demo-article-2.jpg',
+    description: 'Explora cómo la permacultura puede transformar paisajes degradados en ecosistemas productivos en el clima tropical colombiano.',
+    category: 'Permacultura',
+    tags: ['permacultura', 'zonas tropicales', 'ecosistemas']
+  },
+  {
+    title: 'Cultivos ancestrales colombianos: preservando el patrimonio agrícola',
+    slug: 'cultivos-ancestrales-colombianos',
+    date: new Date('2024-01-20'),
+    image: '/images/uploads/demo-article-3.jpg',
+    description: 'Un recorrido por los cultivos tradicionales que han sustentado a las comunidades indígenas colombianas durante siglos.',
+    category: 'Agricultura familiar',
+    tags: ['cultivos ancestrales', 'patrimonio agrícola', 'comunidades indígenas']
+  },
+  {
+    title: 'Técnicas de conservación de suelos en ladera para agricultores colombianos',
+    slug: 'tecnicas-conservacion-suelos',
+    date: new Date('2024-02-10'),
+    image: '/images/uploads/demo-article-4.jpg',
+    description: 'Estrategias efectivas para prevenir la erosión y mantener la fertilidad en terrenos inclinados, comunes en muchas regiones de Colombia.',
+    category: 'Agricultura sostenible',
+    tags: ['conservación de suelos', 'erosión', 'agricultura en laderas']
+  },
+  {
+    title: 'Sistemas agroforestales: integrando árboles, cultivos y ganadería',
+    slug: 'sistemas-agroforestales',
+    date: new Date('2024-03-05'),
+    image: '/images/uploads/demo-article-5.jpg',
+    description: 'Cómo diseñar sistemas productivos que combinen diferentes elementos para crear ecosistemas agrícolas resilientes y productivos.',
+    category: 'Agroecología',
+    tags: ['agroforestería', 'biodiversidad', 'producción integrada']
+  },
+  {
+    title: 'Manejo ecológico de plagas en cultivos tropicales',
+    slug: 'manejo-ecologico-plagas',
+    date: new Date('2024-03-25'),
+    image: '/images/uploads/demo-article-6.jpg',
+    description: 'Alternativas naturales y efectivas para el control de plagas que afectan a los cultivos en el clima tropical colombiano.',
+    category: 'Cultivos orgánicos',
+    tags: ['control biológico', 'manejo integrado', 'agricultura ecológica']
+  }
+];
+
+// Categorías disponibles
+const categorias = [
+  "Todas",
+  "Agroecología",
+  "Agricultura sostenible",
+  "Cultivos orgánicos",
+  "Permacultura",
+  "Agricultura familiar"
+];
+
+// Obtener la categoría de la URL si existe
+const { categoria } = Astro.url.searchParams;
+const categoriaActual = categoria || "Todas";
+
+// Filtrar artículos por categoría si es necesario
+const articulosFiltrados = categoriaActual === "Todas" 
+  ? demoArticles 
+  : demoArticles.filter(art => art.category === categoriaActual);
+---
+
+<Layout title="Artículos - Blog de Agroecología y Agricultura Sostenible" description="Explora nuestros artículos sobre agroecología, permacultura y prácticas agrícolas sostenibles en Colombia">
+  <section class="bg-gradient-to-b from-primary-800 to-primary-700 text-white py-16">
+    <div class="container mx-auto px-4 text-center">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6 font-display" data-aos="fade-up">Artículos</h1>
+      <p class="text-xl max-w-3xl mx-auto text-primary-100" data-aos="fade-up" data-aos-delay="100">
+        Explora nuestros contenidos sobre agroecología, permacultura y prácticas agrícolas sostenibles en Colombia
+      </p>
+    </div>
+  </section>
+  
+  <section class="py-12 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <!-- Filtros de categorías -->
+      <div class="mb-12 flex flex-wrap gap-2 justify-center" data-aos="fade-up">
+        {categorias.map(cat => (
+          <a 
+            href={cat === "Todas" ? "/articulos" : `/articulos?categoria=${encodeURIComponent(cat)}`}
+            class={`px-4 py-2 rounded-full border transition-colors ${
+              categoriaActual === cat 
+                ? 'bg-primary-600 text-white border-primary-600' 
+                : 'bg-white text-gray-700 border-gray-200 hover:border-primary-600 hover:text-primary-600'
+            }`}
+          >
+            {cat}
+          </a>
+        ))}
+      </div>
+      
+      <!-- Resultados -->
+      {articulosFiltrados.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {articulosFiltrados.map((article) => (
+            <ArticleCard article={article} />
+          ))}
+        </div>
+      ) : (
+        <div class="text-center py-16">
+          <h3 class="text-2xl font-bold text-gray-700 mb-2">No hay artículos en esta categoría</h3>
+          <p class="text-gray-600 mb-6">Intenta seleccionar otra categoría o vuelve más tarde</p>
+          <a href="/articulos" class="px-6 py-3 bg-primary-600 text-white rounded-md font-medium hover:bg-primary-700 transition-colors">
+            Ver todos los artículos
+          </a>
+        </div>
+      )}
+    </div>
+  </section>
+</Layout>

@@ -1,11 +1,155 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import ArticleCard from '../components/ArticleCard.astro';
+import CTASection from '../components/CTASection.astro';
+import FeatureCard from '../components/FeatureCard.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Artículos de ejemplo mientras no tengamos contenido real
+const demoArticles = [
+  {
+    title: 'Prácticas agroecológicas para pequeños agricultores',
+    slug: 'practicas-agroecologicas',
+    date: new Date('2023-11-15'),
+    image: '/images/uploads/demo-article-1.jpg',
+    description: 'Descubre cómo implementar prácticas agroecológicas en pequeñas parcelas para maximizar la producción sostenible.',
+    category: 'Agroecología',
+    tags: ['agroecología', 'agricultura sostenible', 'pequeños agricultores']
+  },
+  {
+    title: 'Los beneficios de la permacultura en zonas tropicales',
+    slug: 'beneficios-permacultura-zonas-tropicales',
+    date: new Date('2023-12-05'),
+    image: '/images/uploads/demo-article-2.jpg',
+    description: 'Explora cómo la permacultura puede transformar paisajes degradados en ecosistemas productivos en el clima tropical colombiano.',
+    category: 'Permacultura',
+    tags: ['permacultura', 'zonas tropicales', 'ecosistemas']
+  },
+  {
+    title: 'Cultivos ancestrales colombianos: preservando el patrimonio agrícola',
+    slug: 'cultivos-ancestrales-colombianos',
+    date: new Date('2024-01-20'),
+    image: '/images/uploads/demo-article-3.jpg',
+    description: 'Un recorrido por los cultivos tradicionales que han sustentado a las comunidades indígenas colombianas durante siglos.',
+    category: 'Agricultura familiar',
+    tags: ['cultivos ancestrales', 'patrimonio agrícola', 'comunidades indígenas']
+  }
+];
+
+// Características de la agroecología
+const features = [
+  {
+    title: 'Sostenibilidad ambiental',
+    description: 'Prácticas que preservan los recursos naturales y la biodiversidad para las futuras generaciones.',
+    icon: 'leaf'
+  },
+  {
+    title: 'Justicia social',
+    description: 'Promueve condiciones justas para agricultores y trabajadores del campo, fortaleciendo comunidades rurales.',
+    icon: 'community'
+  },
+  {
+    title: 'Soberanía alimentaria',
+    description: 'Apoya la capacidad de las comunidades para definir sus propios sistemas alimentarios y agrícolas.',
+    icon: 'food'
+  }
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Inicio - Blog de Agroecología y Agricultura Sostenible">
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-primary-800 to-primary-900 text-white overflow-hidden">
+    <!-- Patrón de fondo decorativo -->
+    <div class="absolute inset-0 opacity-20">
+      <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+        <path fill="#fff" fill-rule="evenodd" d="M0 0h20v20H0V0zm20 20h20v20H20V20zm20-20h20v20H40V0zm20 20h20v20H60V20zM0 40h20v20H0V40zm20 20h20v20H20V60zm20-20h20v20H40V40zm20 20h20v20H60V60z"/>
+      </svg>
+    </div>
+    
+    <div class="container mx-auto px-4 py-20 md:py-32 relative z-10">
+      <div class="max-w-3xl" data-aos="fade-right">
+        <h1 class="text-4xl md:text-6xl font-bold font-display mb-6 animate-fade-in">
+          Agroecología para un 
+          <span class="text-primary-300">futuro sostenible</span> 
+          en Colombia
+        </h1>
+        <p class="text-xl md:text-2xl mb-8 text-gray-100 opacity-90 animate-slide-up">
+          Descubre prácticas agrícolas que respetan la tierra, preservan tradiciones y construyen comunidades resilientes.
+        </p>
+        <div class="flex flex-wrap gap-4 animate-fade-in" style="animation-delay: 0.5s;">
+          <a href="/articulos" class="px-6 py-3 bg-white text-primary-800 rounded-md font-semibold hover:bg-gray-100 transition-colors shadow-lg">
+            Ver artículos
+          </a>
+          <a href="/contacto" class="px-6 py-3 bg-transparent border-2 border-white text-white rounded-md font-semibold hover:bg-white/10 transition-colors">
+            Contáctanos
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Forma decorativa -->
+    <div class="absolute bottom-0 left-0 right-0 h-16 bg-gray-50" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-20 bg-gray-50">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-16" data-aos="fade-up">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-display">¿Por qué la agroecología?</h2>
+        <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+          La agroecología combina ciencia, prácticas tradicionales y movimientos sociales para crear sistemas alimentarios justos y sostenibles.
+        </p>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 staggered-animation">
+        {features.map((feature, index) => (
+          <FeatureCard 
+            title={feature.title} 
+            description={feature.description}
+            icon={feature.icon}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+  
+  <!-- Recent Articles Section -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="flex justify-between items-end mb-12">
+        <div data-aos="fade-right">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-display">Artículos recientes</h2>
+          <p class="text-gray-600 max-w-2xl">
+            Explora nuestros últimos artículos sobre agroecología, permacultura y prácticas agrícolas sostenibles en Colombia.
+          </p>
+        </div>
+        <a href="/articulos" class="hidden md:flex items-center text-primary-600 font-medium hover:text-primary-700 transition-colors" data-aos="fade-left">
+          Ver todos los artículos
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-1">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+          </svg>
+        </a>
+      </div>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 staggered-animation">
+        {demoArticles.map((article) => (
+          <ArticleCard article={article} />
+        ))}
+      </div>
+      
+      <div class="mt-12 text-center md:hidden">
+        <a href="/articulos" class="inline-flex items-center text-primary-600 font-medium hover:text-primary-700 transition-colors">
+          Ver todos los artículos
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-1">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <CTASection 
+    title="Únete al movimiento agroecológico" 
+    description="Mantente informado sobre las últimas tendencias en agroecología y agricultura sostenible en Colombia." 
+  />
 </Layout>

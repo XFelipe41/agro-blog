@@ -1,0 +1,300 @@
+import Layout from '../../layouts/Layout.astro';
+import ArticleCard from '../../components/ArticleCard.astro';
+
+export const getStaticPaths = () => {
+  // Artículos de ejemplo
+  const demoArticles = [
+    {
+      title: 'Prácticas agroecológicas para pequeños agricultores',
+      slug: 'practicas-agroecologicas',
+      date: new Date('2023-11-15'),
+      image: '/images/uploads/demo-article-1.jpg',
+      description: 'Descubre cómo implementar prácticas agroecológicas en pequeñas parcelas para maximizar la producción sostenible.',
+      category: 'Agroecología',
+      tags: ['agroecología', 'agricultura sostenible', 'pequeños agricultores'],
+      content: `
+# Prácticas agroecológicas para pequeños agricultores
+
+La agroecología ofrece un enfoque holístico que puede transformar las pequeñas parcelas en sistemas productivos, sostenibles y resilientes. A diferencia de la agricultura convencional, la agroecología trabaja con los procesos naturales, no contra ellos.
+
+## Principios fundamentales
+
+Los pequeños agricultores pueden implementar varios principios agroecológicos:
+
+1. **Diversificación de cultivos**: Plantar múltiples especies e integrar árboles (agroforestería).
+2. **Conservación de suelos**: Uso de abonos verdes, compostaje y técnicas de no-labranza.
+3. **Manejo integrado de plagas**: Control biológico utilizando depredadores naturales.
+4. **Conservación de agua**: Sistemas de captación de agua lluvia y riego eficiente.
+5. **Uso de recursos locales**: Aprovechar insumos disponibles en la propia finca.
+
+## Beneficios para pequeños agricultores colombianos
+
+Los agricultores que adoptan estas prácticas experimentan:
+
+- Mayor resistencia ante eventos climáticos extremos
+- Reducción en costos de producción al depender menos de insumos externos
+- Mejora en la salud del suelo y la biodiversidad
+- Diversificación de ingresos
+- Autonomía y soberanía alimentaria
+
+## Casos de éxito en Colombia
+
+En regiones como Santander, Antioquia y Cauca, pequeños agricultores han logrado revitalizar sus parcelas mediante prácticas agroecológicas, transformando terrenos degradados en ecosistemas productivos.
+
+Estos agricultores ahora no solo producen suficiente para sus familias sino que también generan excedentes para mercados locales, donde sus productos agroecológicos obtienen mejores precios.
+      `
+    },
+    {
+      title: 'Los beneficios de la permacultura en zonas tropicales',
+      slug: 'beneficios-permacultura-zonas-tropicales',
+      date: new Date('2023-12-05'),
+      image: '/images/uploads/demo-article-2.jpg',
+      description: 'Explora cómo la permacultura puede transformar paisajes degradados en ecosistemas productivos en el clima tropical colombiano.',
+      category: 'Permacultura',
+      tags: ['permacultura', 'zonas tropicales', 'ecosistemas'],
+      content: `
+# Los beneficios de la permacultura en zonas tropicales
+
+La permacultura, un sistema de diseño basado en los patrones y relaciones de los ecosistemas naturales, encuentra en las zonas tropicales de Colombia un ambiente ideal para desarrollar todo su potencial. Las condiciones de alta biodiversidad, abundante precipitación y radiación solar constante crean oportunidades únicas.
+
+## Ventajas del clima tropical para la permacultura
+
+1. **Ciclos de crecimiento continuos**: La ausencia de heladas permite cultivos durante todo el año.
+2. **Alta tasa fotosintética**: Mayor productividad biomásica que en climas templados.
+3. **Diversidad biológica**: Facilitando interacciones complejas y sistemas más resilientes.
+4. **Ciclos rápidos de sucesión ecológica**: Permitiendo recuperar suelos degradados en menos tiempo.
+
+## Principios aplicados al contexto tropical colombiano
+
+La aplicación de principios permaculturales como el aprovechamiento de los bordes, la integración en vez de segregación, y el uso de recursos biológicos muestra resultados impresionantes en el trópico colombiano, donde comunidades han transformado tierras infértiles en bosques comestibles altamente productivos.
+
+## Desafíos específicos y soluciones
+
+A pesar de sus ventajas, el clima tropical presenta retos como:
+
+- La rápida descomposición de materia orgánica
+- Lixiviación de nutrientes por lluvias intensas
+- Mayor presión de plagas y enfermedades
+
+Estos desafíos se convierten en oportunidades cuando se diseñan sistemas que aprovechan estas características, como los sistemas multicapa que imitan la estructura del bosque tropical.
+      `
+    },
+    {
+      title: 'Cultivos ancestrales colombianos: preservando el patrimonio agrícola',
+      slug: 'cultivos-ancestrales-colombianos',
+      date: new Date('2024-01-20'),
+      image: '/images/uploads/demo-article-3.jpg',
+      description: 'Un recorrido por los cultivos tradicionales que han sustentado a las comunidades indígenas colombianas durante siglos.',
+      category: 'Agricultura familiar',
+      tags: ['cultivos ancestrales', 'patrimonio agrícola', 'comunidades indígenas'],
+      content: `
+# Cultivos ancestrales colombianos: preservando el patrimonio agrícola
+
+Los cultivos ancestrales colombianos representan no solo una fuente de alimentación, sino un patrimonio cultural invaluable que conecta a las comunidades con sus raíces y tradiciones. A lo largo de siglos, pueblos indígenas y campesinos han seleccionado y preservado variedades adaptadas a distintos ecosistemas del país.
+
+## Importancia de los cultivos tradicionales
+
+Los cultivos ancestrales:
+
+1. **Adaptación local**: Resistencia natural a condiciones ambientales específicas.
+2. **Diversidad genética**: Funcionan como reservorio genético ante el cambio climático.
+3. **Soberanía alimentaria**: Reducen la dependencia de semillas comerciales.
+4. **Identidad cultural**: Mantienen vivas las tradiciones culinarias y medicinales.
+
+## Cultivos ancestrales por región
+
+### Región Andina
+- Variedades de papa (más de 400 tipos nativos)
+- Quinua
+- Cubios, hibias y otras tuberosas andinas
+
+### Amazonía
+- Yuca brava y dulce (más de 100 variedades)
+- Ají amazónico
+- Frutas nativas como arazá y copoazú
+
+### Caribe
+- Maíz criollo
+- Fríjol guajiro
+- Ahuyama
+
+## Amenazas actuales
+
+Estos cultivos enfrentan amenazas como:
+
+- Reemplazo por variedades comerciales
+- Pérdida de conocimientos tradicionales
+- Cambio climático
+- Políticas que no protegen la agrobiodiversidad
+
+## Iniciativas de preservación
+
+Diversas comunidades, con apoyo de organizaciones, están recuperando semillas nativas y conocimientos ancestrales a través de ferias de intercambio, bancos de semillas comunitarios y escuelas de campo.
+      `
+    },
+    {
+      title: 'Técnicas de conservación de suelos en ladera para agricultores colombianos',
+      slug: 'tecnicas-conservacion-suelos',
+      date: new Date('2024-02-10'),
+      image: '/images/uploads/demo-article-4.jpg',
+      description: 'Estrategias efectivas para prevenir la erosión y mantener la fertilidad en terrenos inclinados, comunes en muchas regiones de Colombia.',
+      category: 'Agricultura sostenible',
+      tags: ['conservación de suelos', 'erosión', 'agricultura en laderas']
+    },
+    {
+      title: 'Sistemas agroforestales: integrando árboles, cultivos y ganadería',
+      slug: 'sistemas-agroforestales',
+      date: new Date('2024-03-05'),
+      image: '/images/uploads/demo-article-5.jpg',
+      description: 'Cómo diseñar sistemas productivos que combinen diferentes elementos para crear ecosistemas agrícolas resilientes y productivos.',
+      category: 'Agroecología',
+      tags: ['agroforestería', 'biodiversidad', 'producción integrada']
+    },
+    {
+      title: 'Manejo ecológico de plagas en cultivos tropicales',
+      slug: 'manejo-ecologico-plagas',
+      date: new Date('2024-03-25'),
+      image: '/images/uploads/demo-article-6.jpg',
+      description: 'Alternativas naturales y efectivas para el control de plagas que afectan a los cultivos en el clima tropical colombiano.',
+      category: 'Cultivos orgánicos',
+      tags: ['control biológico', 'manejo integrado', 'agricultura ecológica']
+    }
+  ];
+
+  return demoArticles.map(article => ({
+    params: { slug: article.slug },
+    props: { article }
+  }));
+};
+
+const { article } = Astro.props;
+
+// Formatear la fecha
+const formattedDate = new Intl.DateTimeFormat('es-ES', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric'
+}).format(article.date);
+
+// Artículos relacionados (excluyendo el actual)
+const demoArticles = [
+  {
+    title: 'Prácticas agroecológicas para pequeños agricultores',
+    slug: 'practicas-agroecologicas',
+    date: new Date('2023-11-15'),
+    image: '/images/uploads/demo-article-1.jpg',
+    description: 'Descubre cómo implementar prácticas agroecológicas en pequeñas parcelas para maximizar la producción sostenible.',
+    category: 'Agroecología',
+    tags: ['agroecología', 'agricultura sostenible', 'pequeños agricultores']
+  },
+  {
+    title: 'Los beneficios de la permacultura en zonas tropicales',
+    slug: 'beneficios-permacultura-zonas-tropicales',
+    date: new Date('2023-12-05'),
+    image: '/images/uploads/demo-article-2.jpg',
+    description: 'Explora cómo la permacultura puede transformar paisajes degradados en ecosistemas productivos en el clima tropical colombiano.',
+    category: 'Permacultura',
+    tags: ['permacultura', 'zonas tropicales', 'ecosistemas']
+  },
+  {
+    title: 'Cultivos ancestrales colombianos: preservando el patrimonio agrícola',
+    slug: 'cultivos-ancestrales-colombianos',
+    date: new Date('2024-01-20'),
+    image: '/images/uploads/demo-article-3.jpg',
+    description: 'Un recorrido por los cultivos tradicionales que han sustentado a las comunidades indígenas colombianas durante siglos.',
+    category: 'Agricultura familiar',
+    tags: ['cultivos ancestrales', 'patrimonio agrícola', 'comunidades indígenas']
+  }
+];
+
+const relatedArticles = demoArticles.filter(a => a.slug !== article.slug).slice(0, 3);
+
+<Layout title={article.title} description={article.description}>
+  <!-- Hero del artículo -->
+  <div class="relative h-96 md:h-[500px]">
+    <img 
+      src={article.image} 
+      alt={article.title} 
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+    <div class="absolute inset-0 flex flex-col justify-end p-6 md:p-16 text-white">
+      <span class="bg-primary-600 text-white text-xs font-semibold px-3 py-1 rounded-full mb-4 inline-block">
+        {article.category}
+      </span>
+      <h1 class="text-3xl md:text-5xl font-bold max-w-4xl mb-4 font-display">{article.title}</h1>
+      <div class="flex items-center text-gray-200">
+        <time datetime={article.date.toISOString()}>{formattedDate}</time>
+        <span class="mx-3">•</span>
+        <div class="flex space-x-2">
+          {article.tags && article.tags.map((tag) => (
+            <span class="text-sm">#{tag}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Contenido del artículo -->
+  <article class="container mx-auto px-4 py-12 max-w-3xl">
+    <div class="prose prose-lg max-w-none">
+      {article.content ? (
+        <div set:html={article.content} />
+      ) : (
+        <div class="text-center py-16">
+          <h3 class="text-2xl font-bold text-gray-700 mb-2">Contenido en construcción</h3>
+          <p class="text-gray-600 mb-6">Este artículo está siendo preparado. Vuelve pronto para leer el contenido completo.</p>
+          <a href="/articulos" class="px-6 py-3 bg-primary-600 text-white rounded-md font-medium hover:bg-primary-700 transition-colors">
+            Ver otros artículos
+          </a>
+        </div>
+      )}
+    </div>
+  </article>
+  
+  <!-- Compartir -->
+  <div class="bg-gray-50 py-8">
+    <div class="container mx-auto px-4 max-w-3xl">
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <h3 class="text-xl font-bold text-gray-800 mb-4 md:mb-0">Comparte este artículo</h3>
+        <div class="flex space-x-4">
+          <a href="#" class="p-3 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill-rule="evenodd" d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z" clip-rule="evenodd" />
+            </svg>
+          </a>
+          <a href="#" class="p-3 bg-blue-400 text-white rounded-full hover:bg-blue-500 transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+            </svg>
+          </a>
+          <a href="#" class="p-3 bg-green-500 text-white rounded-full hover:bg-green-600 transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill-rule="evenodd" d="M3.00977 5.83789C3.00977 5.28561 3.45748 4.83789 4.00977 4.83789H20C20.5523 4.83789 21 5.28561 21 5.83789V17.1621C21 17.7144 20.5523 18.1621 20 18.1621H6.13623L3.47186 20.2017C3.30933 20.3297 3.10898 20.3968 2.90592 20.3956C2.70325 20.3944 2.50438 20.3251 2.34371 20.1958C2.18304 20.0666 2.07473 19.8824 2.03871 19.6809C2.0027 19.4794 2.04119 19.2726 2.14506 19.0988L4.15096 15.9966C4.25401 15.8244 4.42086 15.7101 4.60977 15.6789V5.83789H3.00977ZM5.15234 6.3418V15.3418H5.21143L5.43612 15.3206L6.81133 15.1621H20V6.3418H5.15234ZM9 11.3418C9.82843 11.3418 10.5 10.6703 10.5 9.8418C10.5 9.01338 9.82843 8.3418 9 8.3418C8.17157 8.3418 7.5 9.01338 7.5 9.8418C7.5 10.6703 8.17157 11.3418 9 11.3418ZM18 11.3418C18.8284 11.3418 19.5 10.6703 19.5 9.8418C19.5 9.01338 18.8284 8.3418 18 8.3418C17.1716 8.3418 16.5 9.01338 16.5 9.8418C16.5 10.6703 17.1716 11.3418 18 11.3418ZM13.5 10.3418C14.3284 10.3418 15 9.67023 15 8.8418C15 8.01338 14.3284 7.3418 13.5 7.3418C12.6716 7.3418 12 8.01338 12 8.8418C12 9.67023 12.6716 10.3418 13.5 10.3418Z" clip-rule="evenodd"></path>
+            </svg>
+          </a>
+          <a href="#" class="p-3 bg-purple-600 text-white rounded-full hover:bg-purple-700 transition-colors">
+            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+              <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Artículos relacionados -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-gray-900 mb-10 font-display text-center" data-aos="fade-up">
+        Artículos relacionados
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        {relatedArticles.map((article) => (
+          <ArticleCard article={article} />
+        ))}
+      </div>
+    </div>
+  </section>
+</Layout>
