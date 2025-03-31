@@ -2,6 +2,71 @@
 import Layout from '../../layouts/Layout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
 
+export async function getStaticPaths() {
+  const demoArticles = [
+    {
+      title: 'Prácticas agroecológicas para pequeños agricultores',
+      slug: 'practicas-agroecologicas',
+      date: new Date('2023-11-15'),
+      image: 'https://images.unsplash.com/photo-1536657464919-892534f60d6e?q=80&w=1000',
+      description: 'Descubre cómo implementar prácticas agroecológicas en pequeñas parcelas para maximizar la producción sostenible.',
+      category: 'Agroecología',
+      tags: ['agroecología', 'agricultura sostenible', 'pequeños agricultores'],
+      content: `
+# Prácticas agroecológicas para pequeños agricultores
+
+La agroecología ofrece un enfoque holístico...
+
+(Mantén el contenido largo aquí)
+    `
+    },
+    {
+      title: 'Los beneficios de la permacultura en zonas tropicales',
+      slug: 'beneficios-permacultura-zonas-tropicales',
+      date: new Date('2023-12-05'),
+      image: 'https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?q=80&w=1000',
+      description: 'Explora cómo la permacultura puede transformar paisajes degradados en ecosistemas productivos en el clima tropical colombiano.',
+      category: 'Permacultura',
+      tags: ['permacultura', 'zonas tropicales', 'ecosistemas'],
+      content: `
+# Los beneficios de la permacultura en zonas tropicales
+
+La permacultura, un sistema de diseño basado en...
+    `
+    },
+    {
+      title: 'Cultivos ancestrales colombianos: preservando el patrimonio agrícola',
+      slug: 'cultivos-ancestrales-colombianos',
+      date: new Date('2024-01-20'),
+      image: 'https://images.unsplash.com/photo-1465577512280-1c2d41a79862?q=80&w=1000',
+      description: 'Un recorrido por los cultivos tradicionales que han sustentado a las comunidades indígenas colombianas durante siglos.',
+      category: 'Agricultura familiar',
+      tags: ['cultivos ancestrales', 'patrimonio agrícola', 'comunidades indígenas'],
+      content: `
+# Cultivos ancestrales colombianos: preservando el patrimonio agrícola
+
+Los cultivos ancestrales colombianos representan...
+    `
+    }
+  ];
+
+  // Genera una ruta para cada artículo en el array
+  return demoArticles.map(article => ({
+    params: { slug: article.slug },
+    props: { article }
+  }));
+}
+
+// Recibimos el artículo como prop desde getStaticPaths
+const { article } = Astro.props;
+
+const formattedDate = new Intl.DateTimeFormat('es-ES', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric'
+}).format(article.date);
+
+// Para los artículos relacionados, necesitamos tener todos los artículos
 const demoArticles = [
   {
     title: 'Prácticas agroecológicas para pequeños agricultores',
@@ -10,14 +75,7 @@ const demoArticles = [
     image: 'https://images.unsplash.com/photo-1536657464919-892534f60d6e?q=80&w=1000',
     description: 'Descubre cómo implementar prácticas agroecológicas en pequeñas parcelas para maximizar la producción sostenible.',
     category: 'Agroecología',
-    tags: ['agroecología', 'agricultura sostenible', 'pequeños agricultores'],
-    content: `
-# Prácticas agroecológicas para pequeños agricultores
-
-La agroecología ofrece un enfoque holístico...
-
-(Mantén el contenido largo aquí)
-    `
+    tags: ['agroecología', 'agricultura sostenible', 'pequeños agricultores']
   },
   {
     title: 'Los beneficios de la permacultura en zonas tropicales',
@@ -26,12 +84,7 @@ La agroecología ofrece un enfoque holístico...
     image: 'https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?q=80&w=1000',
     description: 'Explora cómo la permacultura puede transformar paisajes degradados en ecosistemas productivos en el clima tropical colombiano.',
     category: 'Permacultura',
-    tags: ['permacultura', 'zonas tropicales', 'ecosistemas'],
-    content: `
-# Los beneficios de la permacultura en zonas tropicales
-
-La permacultura, un sistema de diseño basado en...
-    `
+    tags: ['permacultura', 'zonas tropicales', 'ecosistemas']
   },
   {
     title: 'Cultivos ancestrales colombianos: preservando el patrimonio agrícola',
@@ -40,28 +93,9 @@ La permacultura, un sistema de diseño basado en...
     image: 'https://images.unsplash.com/photo-1465577512280-1c2d41a79862?q=80&w=1000',
     description: 'Un recorrido por los cultivos tradicionales que han sustentado a las comunidades indígenas colombianas durante siglos.',
     category: 'Agricultura familiar',
-    tags: ['cultivos ancestrales', 'patrimonio agrícola', 'comunidades indígenas'],
-    content: `
-# Cultivos ancestrales colombianos: preservando el patrimonio agrícola
-
-Los cultivos ancestrales colombianos representan...
-    `
+    tags: ['cultivos ancestrales', 'patrimonio agrícola', 'comunidades indígenas']
   }
 ];
-
-// Recibimos el slug de la ruta
-const { slug } = Astro.params;
-const article = demoArticles.find(a => a.slug === slug);
-
-if (!article) {
-  throw new Error(`Artículo no encontrado para el slug: ${slug}`);
-}
-
-const formattedDate = new Intl.DateTimeFormat('es-ES', {
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric'
-}).format(article.date);
 
 const relatedArticles = demoArticles.filter(a => a.slug !== article.slug).slice(0, 3);
 ---
