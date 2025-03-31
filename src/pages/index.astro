@@ -3,8 +3,20 @@ import Layout from '../layouts/Layout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import CTASection from '../components/CTASection.astro';
 import FeatureCard from '../components/FeatureCard.astro';
+import { getCollection } from 'astro:content';
 
-// Artículos de ejemplo mientras no tengamos contenido real
+// Obtener artículos reales del CMS
+const allBlogArticles = await getCollection('blog');
+
+// Ordenar artículos por fecha (más recientes primero)
+const sortedArticles = allBlogArticles.sort((a, b) => 
+  b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+// Obtener solo los más recientes para la página principal
+const recentArticles = sortedArticles.slice(0, 3);
+
+// Artículos de respaldo (en caso de que no haya artículos reales)
 const demoArticles = [
   {
     title: 'Prácticas agroecológicas para pequeños agricultores',
@@ -53,6 +65,19 @@ const features = [
     icon: 'food'
   }
 ];
+
+// Determinar qué artículos mostrar (reales o de demostración)
+const articlesToShow = recentArticles.length > 0 
+  ? recentArticles.map(article => ({
+      title: article.data.title,
+      slug: article.slug,
+      date: article.data.date,
+      image: article.data.image,
+      description: article.data.description,
+      category: article.data.category,
+      tags: article.data.tags
+    }))
+  : demoArticles;
 ---
 
 <Layout title="Inicio - Blog de Agroecología y Agricultura Sostenible">
@@ -131,7 +156,7 @@ const features = [
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 staggered-animation">
-        {demoArticles.map((article) => (
+        {articlesToShow.map((article) => (
           <ArticleCard article={article} />
         ))}
       </div>

@@ -1,8 +1,21 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
+  // Obtener todos los artículos del CMS
+  const blogEntries = await getCollection('blog');
+  
+  // Si hay artículos reales en el CMS, crea rutas para ellos
+  if (blogEntries.length > 0) {
+    return blogEntries.map(entry => ({
+      params: { slug: entry.slug },
+      props: { entry },
+    }));
+  }
+  
+  // Si no hay artículos reales, usa los de demostración
   const demoArticles = [
     {
       title: 'Prácticas agroecológicas para pequeños agricultores',
@@ -15,10 +28,34 @@ export async function getStaticPaths() {
       content: `
 # Prácticas agroecológicas para pequeños agricultores
 
-La agroecología ofrece un enfoque holístico...
+La agroecología ofrece un enfoque holístico que puede transformar las pequeñas parcelas en sistemas productivos, sostenibles y resilientes. A diferencia de la agricultura convencional, la agroecología trabaja con los procesos naturales, no contra ellos.
 
-(Mantén el contenido largo aquí)
-    `
+## Principios fundamentales
+
+Los pequeños agricultores pueden implementar varios principios agroecológicos:
+
+1. **Diversificación de cultivos**: Plantar múltiples especies e integrar árboles (agroforestería).
+2. **Conservación de suelos**: Uso de abonos verdes, compostaje y técnicas de no-labranza.
+3. **Manejo integrado de plagas**: Control biológico utilizando depredadores naturales.
+4. **Conservación de agua**: Sistemas de captación de agua lluvia y riego eficiente.
+5. **Uso de recursos locales**: Aprovechar insumos disponibles en la propia finca.
+
+## Beneficios para pequeños agricultores colombianos
+
+Los agricultores que adoptan estas prácticas experimentan:
+
+- Mayor resistencia ante eventos climáticos extremos
+- Reducción en costos de producción al depender menos de insumos externos
+- Mejora en la salud del suelo y la biodiversidad
+- Diversificación de ingresos
+- Autonomía y soberanía alimentaria
+
+## Casos de éxito en Colombia
+
+En regiones como Santander, Antioquia y Cauca, pequeños agricultores han logrado revitalizar sus parcelas mediante prácticas agroecológicas, transformando terrenos degradados en ecosistemas productivos.
+
+Estos agricultores ahora no solo producen suficiente para sus familias sino que también generan excedentes para mercados locales, donde sus productos agroecológicos obtienen mejores precios.
+      `
     },
     {
       title: 'Los beneficios de la permacultura en zonas tropicales',
@@ -31,8 +68,8 @@ La agroecología ofrece un enfoque holístico...
       content: `
 # Los beneficios de la permacultura en zonas tropicales
 
-La permacultura, un sistema de diseño basado en...
-    `
+La permacultura, un sistema de diseño basado en los patrones y relaciones de los ecosistemas naturales, encuentra en las zonas tropicales de Colombia un ambiente ideal para desarrollar todo su potencial.
+      `
     },
     {
       title: 'Cultivos ancestrales colombianos: preservando el patrimonio agrícola',
@@ -45,29 +82,48 @@ La permacultura, un sistema de diseño basado en...
       content: `
 # Cultivos ancestrales colombianos: preservando el patrimonio agrícola
 
-Los cultivos ancestrales colombianos representan...
-    `
+Los cultivos ancestrales colombianos representan no solo una fuente de alimentación, sino un patrimonio cultural invaluable que conecta a las comunidades con sus raíces y tradiciones.
+      `
     }
   ];
 
-  // Genera una ruta para cada artículo en el array
   return demoArticles.map(article => ({
     params: { slug: article.slug },
-    props: { article }
+    props: { article },
   }));
 }
 
-// Recibimos el artículo como prop desde getStaticPaths
-const { article } = Astro.props;
+// Procesar el artículo desde los props
+const { entry, article } = Astro.props;
 
+// Determinar si estamos usando un artículo real del CMS o uno de demostración
+const isRealArticle = !!entry;
+
+// Preparar los datos del artículo según su origen
+let title, date, image, description, category, tags, content;
+
+if (isRealArticle) {
+  // Artículo del CMS
+  ({ title, date, image, description, category, tags } = entry.data);
+  const { Content } = await entry.render();
+  content = Content;
+} else {
+  // Artículo de demostración
+  ({ title, date, image, description, category, tags, content } = article);
+}
+
+// Formatear la fecha
 const formattedDate = new Intl.DateTimeFormat('es-ES', {
   day: 'numeric',
   month: 'long',
   year: 'numeric'
-}).format(article.date);
+}).format(date);
 
-// Para los artículos relacionados, necesitamos tener todos los artículos
-const demoArticles = [
+// Obtener artículos para los relacionados
+const allArticles = await getCollection('blog');
+
+// Artículos de backup para relacionados si no hay suficientes en el CMS
+const demoRelatedArticles = [
   {
     title: 'Prácticas agroecológicas para pequeños agricultores',
     slug: 'practicas-agroecologicas',
@@ -97,23 +153,89 @@ const demoArticles = [
   }
 ];
 
-const relatedArticles = demoArticles.filter(a => a.slug !== article.slug).slice(0, 3);
+// Preparar los artículos relacionados
+let relatedArticles;
+
+if (allArticles.length > 1) {
+  // Si hay suficientes artículos reales, excluyendo el actual
+  const otherArticles = isRealArticle 
+    ? allArticles.filter(a => a.slug !== entry.slug)
+    : allArticles;
+  
+  // Ordenar por fecha y tomar los 3 más recientes
+  relatedArticles = otherArticles
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+    .slice(0, 3)
+    .map(article => ({
+      title: article.data.title,
+      slug: article.slug,
+      date: article.data.date,
+      image: article.data.image,
+      description: article.data.description,
+      category: article.data.category,
+      tags: article.data.tags
+    }));
+} else {
+  // Si no hay suficientes artículos reales, usar los de demostración
+  // pero excluyendo el actual si es uno de demostración
+  relatedArticles = !isRealArticle 
+    ? demoRelatedArticles.filter(a => a.slug !== article.slug)
+    : demoRelatedArticles;
+  
+  // Limitar a 3 artículos
+  relatedArticles = relatedArticles.slice(0, 3);
+}
 ---
 
-<Layout title={article.title} description={article.description}>
-  <section class="max-w-4xl mx-auto px-4 py-10">
-    <img src={article.image} alt={article.title} class="w-full h-64 object-cover rounded-xl mb-6" />
-    <h1 class="text-3xl font-bold mb-2">{article.title}</h1>
-    <p class="text-sm text-gray-500 mb-4">{formattedDate}</p>
-    <div class="prose prose-lg max-w-none" set:html={article.content} />
-  </section>
-
-  <section class="max-w-4xl mx-auto px-4 py-10">
-    <h2 class="text-2xl font-semibold mb-4">Artículos relacionados</h2>
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-      {relatedArticles.map((related) => (
-        <ArticleCard article={related} />
-      ))}
+<Layout title={title} description={description}>
+  <!-- Hero del artículo -->
+  <div class="relative h-96 md:h-[500px]">
+    <img 
+      src={image} 
+      alt={title} 
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
+    <div class="absolute inset-0 flex flex-col justify-end p-6 md:p-16 text-white">
+      <span class="bg-primary-600 text-white text-xs font-semibold px-3 py-1 rounded-full mb-4 inline-block">
+        {category}
+      </span>
+      <h1 class="text-3xl md:text-5xl font-bold max-w-4xl mb-4 font-display">{title}</h1>
+      <div class="flex items-center text-gray-200">
+        <time datetime={date.toISOString()}>{formattedDate}</time>
+        <span class="mx-3">•</span>
+        <div class="flex space-x-2">
+          {tags && tags.map((tag) => (
+            <span class="text-sm">#{tag}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Contenido del artículo -->
+  <article class="container mx-auto px-4 py-12 max-w-3xl">
+    <div class="prose prose-lg max-w-none">
+      {isRealArticle ? (
+        content
+      ) : (
+        <div set:html={content} />
+      )}
+    </div>
+  </article>
+  
+  <!-- Artículos relacionados -->
+  <section class="py-16 bg-white">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-gray-900 mb-10 font-display text-center" data-aos="fade-up">
+        Artículos relacionados
+      </h2>
+      
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+        {relatedArticles.map((article) => (
+          <ArticleCard article={article} />
+        ))}
+      </div>
     </div>
   </section>
 </Layout>

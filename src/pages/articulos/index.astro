@@ -1,14 +1,34 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
+import { getCollection } from 'astro:content';
 
-// Artículos de ejemplo mientras no tengamos contenido real
+// Obtener artículos reales del CMS
+const allBlogArticles = await getCollection('blog');
+
+// Ordenar artículos por fecha (más recientes primero)
+const sortedArticles = allBlogArticles.sort((a, b) => 
+  b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+// Transformar los artículos a un formato compatible con el componente ArticleCard
+const transformedArticles = sortedArticles.map(article => ({
+  title: article.data.title,
+  slug: article.slug,
+  date: article.data.date,
+  image: article.data.image,
+  description: article.data.description,
+  category: article.data.category,
+  tags: article.data.tags
+}));
+
+// Artículos de respaldo (en caso de que no haya artículos reales)
 const demoArticles = [
   {
     title: 'Prácticas agroecológicas para pequeños agricultores',
     slug: 'practicas-agroecologicas',
     date: new Date('2023-11-15'),
-    image: '/images/uploads/demo-article-1.jpg',
+    image: 'https://images.unsplash.com/photo-1536657464919-892534f60d6e?q=80&w=1000',
     description: 'Descubre cómo implementar prácticas agroecológicas en pequeñas parcelas para maximizar la producción sostenible.',
     category: 'Agroecología',
     tags: ['agroecología', 'agricultura sostenible', 'pequeños agricultores']
@@ -17,7 +37,7 @@ const demoArticles = [
     title: 'Los beneficios de la permacultura en zonas tropicales',
     slug: 'beneficios-permacultura-zonas-tropicales',
     date: new Date('2023-12-05'),
-    image: '/images/uploads/demo-article-2.jpg',
+    image: 'https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?q=80&w=1000',
     description: 'Explora cómo la permacultura puede transformar paisajes degradados en ecosistemas productivos en el clima tropical colombiano.',
     category: 'Permacultura',
     tags: ['permacultura', 'zonas tropicales', 'ecosistemas']
@@ -26,7 +46,7 @@ const demoArticles = [
     title: 'Cultivos ancestrales colombianos: preservando el patrimonio agrícola',
     slug: 'cultivos-ancestrales-colombianos',
     date: new Date('2024-01-20'),
-    image: '/images/uploads/demo-article-3.jpg',
+    image: 'https://images.unsplash.com/photo-1465577512280-1c2d41a79862?q=80&w=1000',
     description: 'Un recorrido por los cultivos tradicionales que han sustentado a las comunidades indígenas colombianas durante siglos.',
     category: 'Agricultura familiar',
     tags: ['cultivos ancestrales', 'patrimonio agrícola', 'comunidades indígenas']
@@ -35,7 +55,7 @@ const demoArticles = [
     title: 'Técnicas de conservación de suelos en ladera para agricultores colombianos',
     slug: 'tecnicas-conservacion-suelos',
     date: new Date('2024-02-10'),
-    image: '/images/uploads/demo-article-4.jpg',
+    image: 'https://images.unsplash.com/photo-1587383378486-83c667ff5a5e?q=80&w=1000',
     description: 'Estrategias efectivas para prevenir la erosión y mantener la fertilidad en terrenos inclinados, comunes en muchas regiones de Colombia.',
     category: 'Agricultura sostenible',
     tags: ['conservación de suelos', 'erosión', 'agricultura en laderas']
@@ -44,7 +64,7 @@ const demoArticles = [
     title: 'Sistemas agroforestales: integrando árboles, cultivos y ganadería',
     slug: 'sistemas-agroforestales',
     date: new Date('2024-03-05'),
-    image: '/images/uploads/demo-article-5.jpg',
+    image: 'https://images.unsplash.com/photo-1542638355-a005852fa468?q=80&w=1000',
     description: 'Cómo diseñar sistemas productivos que combinen diferentes elementos para crear ecosistemas agrícolas resilientes y productivos.',
     category: 'Agroecología',
     tags: ['agroforestería', 'biodiversidad', 'producción integrada']
@@ -53,22 +73,23 @@ const demoArticles = [
     title: 'Manejo ecológico de plagas en cultivos tropicales',
     slug: 'manejo-ecologico-plagas',
     date: new Date('2024-03-25'),
-    image: '/images/uploads/demo-article-6.jpg',
+    image: 'https://images.unsplash.com/photo-1511149755252-35875b273fd6?q=80&w=1000',
     description: 'Alternativas naturales y efectivas para el control de plagas que afectan a los cultivos en el clima tropical colombiano.',
     category: 'Cultivos orgánicos',
     tags: ['control biológico', 'manejo integrado', 'agricultura ecológica']
   }
 ];
 
-// Categorías disponibles
-const categorias = [
-  "Todas",
-  "Agroecología",
-  "Agricultura sostenible",
-  "Cultivos orgánicos",
-  "Permacultura",
-  "Agricultura familiar"
-];
+// Determinar qué artículos mostrar (reales o de demostración)
+const allArticles = transformedArticles.length > 0 ? transformedArticles : demoArticles;
+
+// Recopilar todas las categorías únicas de los artículos disponibles
+const categoriasUnicas = ["Todas"];
+allArticles.forEach(article => {
+  if (!categoriasUnicas.includes(article.category)) {
+    categoriasUnicas.push(article.category);
+  }
+});
 
 // Obtener la categoría de la URL si existe
 const { categoria } = Astro.url.searchParams;
@@ -76,8 +97,8 @@ const categoriaActual = categoria || "Todas";
 
 // Filtrar artículos por categoría si es necesario
 const articulosFiltrados = categoriaActual === "Todas" 
-  ? demoArticles 
-  : demoArticles.filter(art => art.category === categoriaActual);
+  ? allArticles 
+  : allArticles.filter(art => art.category === categoriaActual);
 ---
 
 <Layout title="Artículos - Blog de Agroecología y Agricultura Sostenible" description="Explora nuestros artículos sobre agroecología, permacultura y prácticas agrícolas sostenibles en Colombia">
@@ -94,7 +115,7 @@ const articulosFiltrados = categoriaActual === "Todas"
     <div class="container mx-auto px-4">
       <!-- Filtros de categorías -->
       <div class="mb-12 flex flex-wrap gap-2 justify-center" data-aos="fade-up">
-        {categorias.map(cat => (
+        {categoriasUnicas.map(cat => (
           <a 
             href={cat === "Todas" ? "/articulos" : `/articulos?categoria=${encodeURIComponent(cat)}`}
             class={`px-4 py-2 rounded-full border transition-colors ${
