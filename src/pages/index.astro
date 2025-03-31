@@ -10,7 +10,7 @@ const demoArticles = [
     title: 'Prácticas agroecológicas para pequeños agricultores',
     slug: 'practicas-agroecologicas',
     date: new Date('2023-11-15'),
-    image: '/images/uploads/demo-article-1.jpg',
+    image: 'https://images.unsplash.com/photo-1536657464919-892534f60d6e?q=80&w=1000',
     description: 'Descubre cómo implementar prácticas agroecológicas en pequeñas parcelas para maximizar la producción sostenible.',
     category: 'Agroecología',
     tags: ['agroecología', 'agricultura sostenible', 'pequeños agricultores']
@@ -19,7 +19,7 @@ const demoArticles = [
     title: 'Los beneficios de la permacultura en zonas tropicales',
     slug: 'beneficios-permacultura-zonas-tropicales',
     date: new Date('2023-12-05'),
-    image: '/images/uploads/demo-article-2.jpg',
+    image: 'https://images.unsplash.com/photo-1500651230702-0e2d8a49d4ad?q=80&w=1000',
     description: 'Explora cómo la permacultura puede transformar paisajes degradados en ecosistemas productivos en el clima tropical colombiano.',
     category: 'Permacultura',
     tags: ['permacultura', 'zonas tropicales', 'ecosistemas']
@@ -28,7 +28,7 @@ const demoArticles = [
     title: 'Cultivos ancestrales colombianos: preservando el patrimonio agrícola',
     slug: 'cultivos-ancestrales-colombianos',
     date: new Date('2024-01-20'),
-    image: '/images/uploads/demo-article-3.jpg',
+    image: 'https://images.unsplash.com/photo-1465577512280-1c2d41a79862?q=80&w=1000',
     description: 'Un recorrido por los cultivos tradicionales que han sustentado a las comunidades indígenas colombianas durante siglos.',
     category: 'Agricultura familiar',
     tags: ['cultivos ancestrales', 'patrimonio agrícola', 'comunidades indígenas']
@@ -101,11 +101,11 @@ const features = [
       </div>
       
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8 staggered-animation">
-        {features.map((feature, index) => (
+        {features.map((feature) => (
           <FeatureCard 
             title={feature.title} 
             description={feature.description}
-            icon={feature.icon}
+            icon={feature.icon as 'leaf' | 'community' | 'food'}
           />
         ))}
       </div>
