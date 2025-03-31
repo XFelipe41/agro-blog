@@ -11,6 +11,12 @@ const sortedArticles = allBlogArticles.sort((a, b) =>
   b.data.date.valueOf() - a.data.date.valueOf()
 );
 
+// Debug: Imprimir información sobre los artículos encontrados
+console.log(`Artículos encontrados: ${allBlogArticles.length}`);
+allBlogArticles.forEach((article, index) => {
+  console.log(`[${index}] Artículo: ${article.slug}, Título: ${article.data.title}, Fecha: ${article.data.date}`);
+});
+
 // Transformar los artículos a un formato compatible con el componente ArticleCard
 const transformedArticles = sortedArticles.map(article => ({
   title: article.data.title,
@@ -21,6 +27,9 @@ const transformedArticles = sortedArticles.map(article => ({
   category: article.data.category,
   tags: article.data.tags
 }));
+
+// Debug: Verificar artículos transformados
+console.log(`Artículos transformados: ${transformedArticles.length}`);
 
 // Artículos de respaldo (en caso de que no haya artículos reales)
 const demoArticles = [
