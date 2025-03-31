@@ -3,16 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin - Blog de Agroecología en Colombia</title>
-  <link href="/admin/config.yml" type="text/yaml" rel="cms-config-url">
+  <title>Admin - Blog de Agroecología</title>
+
+  <!-- Ruta al archivo de configuración del CMS -->
+  <link rel="cms-config-url" type="text/yaml" href="/admin/config.yml" />
+
+  <!-- Script de Netlify Identity para login -->
   <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 </head>
 <body>
-  <script>window.CMS_MANUAL_INIT = true;</script>
+  <!-- Aquí se renderiza el CMS -->
+  <div id="nc-root"></div>
+
+  <!-- Script de Decap CMS -->
   <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
   <script>
-    const { CMS, initCMS: init } = window.DecapCMS;
-    init();
+    // Inicializar Netlify Identity (login)
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", (user) => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+
+    // Inicializar Decap CMS
+    window.CMS_MANUAL_INIT = true;
+    const { initCMS } = window.DecapCMS;
+    initCMS();
   </script>
 </body>
-</html> 
+</html>

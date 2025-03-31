@@ -1,0 +1,2 @@
+# Redirecciones para Netlify
+/admin/*    /admin/index.html   200 
