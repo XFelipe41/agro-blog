@@ -112,6 +112,9 @@ if (isRealArticle) {
   ({ title, date, image, description, category, tags, content } = article);
 }
 
+// Si category es un array, tomar el primer elemento para mostrar
+const categoryDisplay = Array.isArray(category) ? category[0] : category;
+
 // Formatear la fecha
 const formattedDate = new Intl.DateTimeFormat('es-ES', {
   day: 'numeric',
@@ -198,7 +201,7 @@ if (allArticles.length > 1) {
     <div class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent"></div>
     <div class="absolute inset-0 flex flex-col justify-end p-6 md:p-16 text-white">
       <span class="bg-primary-600 text-white text-xs font-semibold px-3 py-1 rounded-full mb-4 inline-block">
-        {category}
+        {categoryDisplay}
       </span>
       <h1 class="text-3xl md:text-5xl font-bold max-w-4xl mb-4 font-display">{title}</h1>
       <div class="flex items-center text-gray-200">

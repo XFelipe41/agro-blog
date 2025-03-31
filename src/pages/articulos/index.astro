@@ -86,19 +86,26 @@ const allArticles = transformedArticles.length > 0 ? transformedArticles : demoA
 // Recopilar todas las categorías únicas de los artículos disponibles
 const categoriasUnicas = ["Todas"];
 allArticles.forEach(article => {
-  if (!categoriasUnicas.includes(article.category)) {
-    categoriasUnicas.push(article.category);
-  }
+  const categorias = Array.isArray(article.category) ? article.category : [article.category];
+  categorias.forEach(cat => {
+    if (cat && !categoriasUnicas.includes(cat)) {
+      categoriasUnicas.push(cat);
+    }
+  });
 });
 
 // Obtener la categoría de la URL si existe
-const { categoria } = Astro.url.searchParams;
-const categoriaActual = categoria || "Todas";
+const params = Astro.url.searchParams;
+const categoria = params.get('categoria') || "Todas";
+const categoriaActual = categoria;
 
 // Filtrar artículos por categoría si es necesario
 const articulosFiltrados = categoriaActual === "Todas" 
   ? allArticles 
-  : allArticles.filter(art => art.category === categoriaActual);
+  : allArticles.filter(art => {
+      const categorias = Array.isArray(art.category) ? art.category : [art.category];
+      return categorias.includes(categoriaActual);
+    });
 ---
 
 <Layout title="Artículos - Blog de Agroecología y Agricultura Sostenible" description="Explora nuestros artículos sobre agroecología, permacultura y prácticas agrícolas sostenibles en Colombia">

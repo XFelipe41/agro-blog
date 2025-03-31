@@ -6,7 +6,7 @@ export interface Props {
     date: Date;
     image: string;
     description: string;
-    category: string;
+    category: string | string[];
     tags?: string[];
   };
 }
@@ -19,6 +19,9 @@ const formattedDate = new Intl.DateTimeFormat('es-ES', {
   month: 'long',
   year: 'numeric'
 }).format(article.date);
+
+// Convertir category a string si es un array
+const categoryDisplay = Array.isArray(article.category) ? article.category[0] : article.category;
 ---
 
 <article class="bg-white rounded-lg overflow-hidden shadow-md transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl" data-aos="fade-up">
@@ -31,7 +34,7 @@ const formattedDate = new Intl.DateTimeFormat('es-ES', {
       />
       <div class="absolute top-4 left-4">
         <span class="bg-primary-600 text-white text-xs font-semibold px-3 py-1 rounded-full">
-          {article.category}
+          {categoryDisplay}
         </span>
       </div>
     </div>
