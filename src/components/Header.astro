@@ -1,22 +1,23 @@
-<header class="fixed w-full bg-white bg-opacity-95 shadow-sm z-50 transition-all duration-300">
-  <div class="container mx-auto px-4 py-4 md:px-6">
+<header class="fixed w-full bg-white bg-opacity-95 shadow-sm z-50 transition-all duration-300 animate-header">
+  <div class="container mx-auto px-4 py-4 md:px-6" id="header-container">
     <div class="flex justify-between items-center">
-      <!-- Logo -->
-      <a href="/" class="flex items-center space-x-2">
-        <div class="w-10 h-10 bg-primary-600 rounded-full flex items-center justify-center">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6 text-white">
+      <!-- Logo con espacio para imagen -->
+      <a href="/" class="flex items-center space-x-3">
+        <div class="w-12 h-12 rounded-lg overflow-hidden flex items-center justify-center bg-primary-600 transition-transform hover:scale-105 duration-300">
+          <!-- Espacio para logo real (sustituye este SVG por tu logo cuando lo tengas) -->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-8 h-8 text-white">
             <path d="M15.75 4.5a3 3 0 11.825 2.066l-8.421 4.679a3.002 3.002 0 010 1.51l8.421 4.679a3 3 0 11-.729 1.31l-8.421-4.678a3 3 0 110-4.132l8.421-4.679a3 3 0 01-.096-.755z" />
           </svg>
         </div>
-        <span class="text-xl font-bold text-gray-900 font-display">AgroEco<span class="text-primary-600">Colombia</span></span>
+        <span class="text-2xl font-bold text-gray-900 font-display">AgroEco<span class="text-primary-600">Colombia</span></span>
       </a>
       
       <!-- Navigation - Desktop -->
       <nav class="hidden md:flex items-center space-x-8">
-        <a href="/" class="text-gray-700 hover:text-primary-600 transition-colors font-medium">Inicio</a>
-        <a href="/articulos" class="text-gray-700 hover:text-primary-600 transition-colors font-medium">Artículos</a>
-        <a href="/contacto" class="text-gray-700 hover:text-primary-600 transition-colors font-medium">Contacto</a>
-        <a href="/admin" class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors">Admin</a>
+        <a href="/" class="text-base md:text-lg text-gray-700 hover:text-primary-600 transition-colors font-medium relative nav-link">Inicio</a>
+        <a href="/articulos" class="text-base md:text-lg text-gray-700 hover:text-primary-600 transition-colors font-medium relative nav-link">Artículos</a>
+        <a href="/nosotros" class="text-base md:text-lg text-gray-700 hover:text-primary-600 transition-colors font-medium relative nav-link">Nosotros</a>
+        <a href="/contacto" class="text-base md:text-lg text-gray-700 hover:text-primary-600 transition-colors font-medium relative nav-link">Contacto</a>
       </nav>
       
       <!-- Mobile menu button -->
@@ -30,38 +31,117 @@
     <!-- Mobile Navigation -->
     <div id="mobile-menu" class="md:hidden hidden mt-4 pb-2">
       <div class="flex flex-col space-y-3">
-        <a href="/" class="text-gray-700 hover:text-primary-600 transition-colors font-medium py-2">Inicio</a>
-        <a href="/articulos" class="text-gray-700 hover:text-primary-600 transition-colors font-medium py-2">Artículos</a>
-        <a href="/contacto" class="text-gray-700 hover:text-primary-600 transition-colors font-medium py-2">Contacto</a>
-        <a href="/admin" class="px-4 py-2 bg-primary-600 text-white rounded-md hover:bg-primary-700 transition-colors inline-block text-center">Admin</a>
+        <a href="/" class="text-lg text-gray-700 hover:text-primary-600 transition-colors font-medium py-2">Inicio</a>
+        <a href="/articulos" class="text-lg text-gray-700 hover:text-primary-600 transition-colors font-medium py-2">Artículos</a>
+        <a href="/nosotros" class="text-lg text-gray-700 hover:text-primary-600 transition-colors font-medium py-2">Nosotros</a>
+        <a href="/contacto" class="text-lg text-gray-700 hover:text-primary-600 transition-colors font-medium py-2">Contacto</a>
       </div>
     </div>
   </div>
 </header>
 
 <!-- Espaciador para compensar el header fixed -->
-<div class="h-20"></div>
+<div class="h-20" id="header-spacer"></div>
 
 <script is:inline>
-  // Mobile menu toggle
+  // Mobile menu toggle and header scroll behavior
   document.addEventListener('DOMContentLoaded', () => {
     const mobileMenuButton = document.getElementById('mobile-menu-button');
     const mobileMenu = document.getElementById('mobile-menu');
+    const header = document.querySelector('header');
+    const headerContainer = document.getElementById('header-container');
+    let lastScrollY = window.scrollY;
     
+    // Mobile menu toggle
     mobileMenuButton.addEventListener('click', () => {
       mobileMenu.classList.toggle('hidden');
     });
     
-    // Scroll behavior for header
-    const header = document.querySelector('header');
+    // Scroll behavior with throttling for better performance
+    let ticking = false;
+    
     window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        header.classList.add('py-2', 'shadow-md');
-        header.classList.remove('py-4', 'shadow-sm');
-      } else {
-        header.classList.add('py-4', 'shadow-sm');
-        header.classList.remove('py-2', 'shadow-md');
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          // Hide/show header on scroll direction
+          const currentScrollY = window.scrollY;
+          
+          // Apply compact styling when scrolled down
+          if (currentScrollY > 50) {
+            headerContainer.classList.add('py-2');
+            headerContainer.classList.remove('py-4');
+            header.classList.add('scrolled', 'shadow-md');
+            header.classList.remove('shadow-sm');
+          } else {
+            headerContainer.classList.add('py-4');
+            headerContainer.classList.remove('py-2');
+            header.classList.remove('scrolled', 'shadow-md');
+            header.classList.add('shadow-sm');
+          }
+          
+          // Hide header when scrolling down, show when scrolling up
+          if (currentScrollY > lastScrollY && currentScrollY > 200) {
+            // Scrolling down - hide header
+            header.classList.add('header-hidden');
+          } else {
+            // Scrolling up - show header
+            header.classList.remove('header-hidden');
+          }
+          
+          lastScrollY = currentScrollY;
+          ticking = false;
+        });
+        
+        ticking = true;
       }
     });
   });
-</script> 
+</script>
+
+<style>
+  /* Animación de entrada para el header */
+  @keyframes slideDown {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .animate-header {
+    animation: slideDown 0.6s ease-in-out;
+  }
+  
+  /* Efecto de subrayado en los enlaces de navegación */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: theme('colors.primary.600');
+    transition: width 0.3s ease;
+  }
+  
+  .nav-link:hover::after {
+    width: 100%;
+  }
+  
+  /* Estilos cuando se hace scroll */
+  .header.scrolled {
+    backdrop-filter: blur(10px);
+  }
+  
+  /* Animación para ocultar/mostrar el header */
+  .header-hidden {
+    transform: translateY(-100%);
+  }
+  
+  header {
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease, background-color 0.3s ease;
+  }
+</style> 

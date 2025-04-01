@@ -1,0 +1,80 @@
+---
+export interface Props {
+  article: {
+    title: string;
+    slug: string;
+    date: Date;
+    image: string;
+    description: string;
+    category: string | string[];
+    tags?: string[];
+  };
+}
+
+const { article } = Astro.props;
+
+// Formatear la fecha
+const formattedDate = new Intl.DateTimeFormat('es-ES', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric'
+}).format(article.date);
+
+// Convertir category a string si es un array
+const categoryDisplay = Array.isArray(article.category) ? article.category[0] : article.category;
+---
+
+<div class="bg-white rounded-xl overflow-hidden shadow-xl border border-gray-100 md:flex h-full transition-transform duration-300 hover:-translate-y-2 hover:shadow-2xl" data-aos="fade-up">
+  <div class="md:w-1/2 relative overflow-hidden">
+    <a href={`/articulos/${article.slug}`} class="block h-full">
+      <img 
+        src={article.image} 
+        alt={article.title} 
+        class="w-full h-full object-cover transition-transform duration-700 hover:scale-110"
+        style="min-height: 300px; max-height: 450px;"
+      />
+      <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-t from-black/50 to-transparent opacity-60"></div>
+      <div class="absolute top-4 left-4">
+        <span class="bg-primary-600 text-white text-sm font-semibold px-4 py-1.5 rounded-full">
+          {categoryDisplay}
+        </span>
+      </div>
+      <div class="absolute bottom-4 left-4">
+        <span class="bg-white/90 backdrop-blur-sm text-primary-700 text-sm font-semibold px-3 py-1 rounded-full">
+          Artículo destacado
+        </span>
+      </div>
+    </a>
+  </div>
+  
+  <div class="md:w-1/2 p-8 flex flex-col justify-center">
+    <a href={`/articulos/${article.slug}`} class="block">
+      <time datetime={article.date.toISOString()} class="text-sm text-gray-500 mb-3 block">
+        {formattedDate}
+      </time>
+      
+      <h2 class="text-2xl md:text-3xl font-bold mb-4 text-gray-900 hover:text-primary-600 transition-colors">
+        {article.title}
+      </h2>
+      
+      <p class="text-gray-600 mb-6 line-clamp-4">
+        {article.description}
+      </p>
+      
+      <div class="flex flex-wrap gap-2 mb-6">
+        {article.tags && article.tags.map((tag) => (
+          <span class="text-xs bg-gray-100 text-gray-700 px-3 py-1 rounded-full hover:bg-primary-50 hover:text-primary-700 transition-colors">
+            #{tag}
+          </span>
+        ))}
+      </div>
+      
+      <a href={`/articulos/${article.slug}`} class="inline-flex items-center text-primary-600 font-medium group">
+        Leer artículo completo
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+        </svg>
+      </a>
+    </a>
+  </div>
+</div> 

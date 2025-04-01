@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
+import FeaturedArticle from '../../components/FeaturedArticle.astro';
 import { getCollection } from 'astro:content';
 
 // Obtener artículos reales del CMS
@@ -118,12 +119,31 @@ const articulosFiltrados = categoriaActual === "Todas"
 ---
 
 <Layout title="Artículos - Blog de Agroecología y Agricultura Sostenible" description="Explora nuestros artículos sobre agroecología, permacultura y prácticas agrícolas sostenibles en Colombia">
-  <section class="bg-gradient-to-b from-primary-800 to-primary-700 text-white py-16">
-    <div class="container mx-auto px-4 text-center">
-      <h1 class="text-4xl md:text-5xl font-bold mb-6 font-display" data-aos="fade-up">Artículos</h1>
+  <!-- Header con imagen de fondo y superposición para resaltar el título -->
+  <section class="relative min-h-[300px] flex items-center">
+    <!-- Imagen de fondo -->
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?q=80&w=1000" 
+        alt="Agricultura sostenible" 
+        class="w-full h-full object-cover object-center"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-primary-900/90 to-primary-800/90 z-10"></div>
+    </div>
+    
+    <!-- Contenido del Header -->
+    <div class="container mx-auto px-4 text-center relative z-20">
+      <h1 class="text-4xl md:text-5xl font-bold mb-6 font-display text-white" data-aos="fade-up">Artículos</h1>
       <p class="text-xl max-w-3xl mx-auto text-primary-100" data-aos="fade-up" data-aos-delay="100">
         Explora nuestros contenidos sobre agroecología, permacultura y prácticas agrícolas sostenibles en Colombia
       </p>
+    </div>
+    
+    <!-- Decoración inferior -->
+    <div class="absolute bottom-0 left-0 right-0 z-10">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" fill="#f9fafb" preserveAspectRatio="none">
+        <path d="M0,48L80,42.7C160,37,320,27,480,21.3C640,16,800,16,960,21.3C1120,27,1280,37,1360,42.7L1440,48L1440,48L1360,48C1280,48,1120,48,960,48C800,48,640,48,480,48C320,48,160,48,80,48L0,48Z"></path>
+      </svg>
     </div>
   </section>
   
@@ -136,7 +156,7 @@ const articulosFiltrados = categoriaActual === "Todas"
             href={cat === "Todas" ? "/articulos" : `/articulos?categoria=${encodeURIComponent(cat)}`}
             class={`px-4 py-2 rounded-full border transition-colors ${
               categoriaActual === cat 
-                ? 'bg-primary-600 text-white border-primary-600' 
+                ? 'bg-primary-600 text-white border-primary-600 shadow-md' 
                 : 'bg-white text-gray-700 border-gray-200 hover:border-primary-600 hover:text-primary-600'
             }`}
           >
@@ -164,3 +184,30 @@ const articulosFiltrados = categoriaActual === "Todas"
     </div>
   </section>
 </Layout>
+
+<script>
+  // Animación de scroll suave para los filtros de categoría
+  document.addEventListener('astro:page-load', () => {
+    const filterLinks = document.querySelectorAll('.rounded-full');
+    
+    filterLinks.forEach(link => {
+      link.addEventListener('click', (e) => {
+        // Solo aplicar si tiene hash o query params
+        if (link.getAttribute('href')?.includes('?') || link.getAttribute('href')?.includes('#')) {
+          e.preventDefault();
+          const href = link.getAttribute('href');
+          
+          // Animar filtros
+          filterLinks.forEach(l => l.classList.add('opacity-50', 'scale-95'));
+          link.classList.remove('opacity-50', 'scale-95');
+          link.classList.add('scale-105');
+          
+          // Esperar para la navegación
+          setTimeout(() => {
+            window.location.href = href || '#';
+          }, 300);
+        }
+      });
+    });
+  });
+</script>

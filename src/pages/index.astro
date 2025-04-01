@@ -3,6 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import ArticleCard from '../components/ArticleCard.astro';
 import CTASection from '../components/CTASection.astro';
 import FeatureCard from '../components/FeatureCard.astro';
+import StatsSection from '../components/StatsSection.astro';
+import TestimonialsSection from '../components/TestimonialsSection.astro';
+import TeamSection from '../components/TeamSection.astro';
+import FAQSection from '../components/FAQSection.astro';
+import LogoCloud from '../components/LogoCloud.astro';
+import HighlightBanner from '../components/HighlightBanner.astro';
 import { getCollection } from 'astro:content';
 
 // Obtener artículos reales del CMS
@@ -81,39 +87,93 @@ const articlesToShow = recentArticles.length > 0
 ---
 
 <Layout title="Inicio - Blog de Agroecología y Agricultura Sostenible">
-  <!-- Hero Section -->
-  <section class="relative bg-gradient-to-br from-primary-800 to-primary-900 text-white overflow-hidden">
-    <!-- Patrón de fondo decorativo -->
-    <div class="absolute inset-0 opacity-20">
-      <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
-        <path fill="#fff" fill-rule="evenodd" d="M0 0h20v20H0V0zm20 20h20v20H20V20zm20-20h20v20H40V0zm20 20h20v20H60V20zM0 40h20v20H0V40zm20 20h20v20H20V60zm20-20h20v20H40V40zm20 20h20v20H60V60z"/>
-      </svg>
+  <!-- Hero Section - Mejorado con imagen y efectos modernos -->
+  <section class="relative min-h-[90vh] flex items-center bg-white overflow-hidden">
+    <!-- Imágenes de fondo -->
+    <div class="absolute inset-0 z-0">
+      <div class="absolute inset-0 bg-gradient-to-br from-primary-900/90 to-primary-800/80 z-10"></div>
+      <img 
+        src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?q=80&w=1000" 
+        alt="Agricultura sostenible" 
+        class="absolute w-full h-full object-cover object-center"
+      />
     </div>
-    
-    <div class="container mx-auto px-4 py-20 md:py-32 relative z-10">
-      <div class="max-w-3xl" data-aos="fade-right">
-        <h1 class="text-4xl md:text-6xl font-bold font-display mb-6 animate-fade-in">
-          Agroecología para un 
-          <span class="text-primary-300">futuro sostenible</span> 
-          en Colombia
-        </h1>
-        <p class="text-xl md:text-2xl mb-8 text-gray-100 opacity-90 animate-slide-up">
-          Descubre prácticas agrícolas que respetan la tierra, preservan tradiciones y construyen comunidades resilientes.
-        </p>
-        <div class="flex flex-wrap gap-4 animate-fade-in" style="animation-delay: 0.5s;">
-          <a href="/articulos" class="px-6 py-3 bg-white text-primary-800 rounded-md font-semibold hover:bg-gray-100 transition-colors shadow-lg">
-            Ver artículos
-          </a>
-          <a href="/contacto" class="px-6 py-3 bg-transparent border-2 border-white text-white rounded-md font-semibold hover:bg-white/10 transition-colors">
-            Contáctanos
-          </a>
+
+    <!-- Contenido del Hero -->
+    <div class="container mx-auto px-4 relative z-20 py-20 md:py-32">
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <div class="text-white max-w-2xl" data-aos="fade-right">
+          <span class="bg-white/10 backdrop-blur-sm text-white text-sm font-semibold px-4 py-1.5 rounded-full mb-6 inline-block">
+            Transformando la agricultura en Colombia
+          </span>
+          <h1 class="text-4xl md:text-6xl font-bold font-display mb-6 leading-tight">
+            Agroecología para un 
+            <span class="text-primary-300">futuro sostenible</span> 
+            en Colombia
+          </h1>
+          <p class="text-xl md:text-2xl mb-8 text-gray-100 opacity-90">
+            Descubre prácticas agrícolas que respetan la tierra, preservan tradiciones y construyen comunidades resilientes.
+          </p>
+          <div class="flex flex-wrap gap-4 animate-fade-in" style="animation-delay: 0.5s;">
+            <a href="/articulos" class="px-6 py-3 bg-white text-primary-800 rounded-md font-semibold hover:bg-gray-100 transition-colors shadow-lg flex items-center group">
+              Ver artículos
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+              </svg>
+            </a>
+            <a href="/contacto" class="px-6 py-3 bg-transparent border-2 border-white text-white rounded-md font-semibold hover:bg-white/10 transition-colors flex items-center">
+              Contáctanos
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75" />
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <!-- Tarjeta destacada flotante -->
+        <div class="hidden md:block" data-aos="fade-left">
+          <div class="relative rounded-xl overflow-hidden group h-80 shadow-2xl">
+            <!-- Imagen del artículo -->
+            <img 
+              src={articlesToShow[0].image}
+              alt={articlesToShow[0].title}
+              class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+            />
+            
+            <!-- Superposición con gradiente -->
+            <div class="absolute inset-0 bg-gradient-to-t from-gray-900 via-gray-900/70 to-transparent opacity-80 group-hover:opacity-90 transition-opacity duration-300"></div>
+            
+            <!-- Etiqueta de "Nuevo" -->
+            <div class="absolute top-4 right-4 bg-primary-500 text-white rounded-full w-16 h-16 flex items-center justify-center text-xl font-bold z-10 shadow-lg">
+              Nuevo
+            </div>
+            
+            <!-- Contenido sobre la imagen -->
+            <div class="absolute bottom-0 left-0 right-0 p-6 text-white z-10 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+              <h3 class="text-2xl font-bold mb-2">{articlesToShow[0].title}</h3>
+              <p class="text-gray-200 mb-4 text-sm line-clamp-2">{articlesToShow[0].description}</p>
+              <a href={`/articulos/${articlesToShow[0].slug}`} class="inline-flex items-center bg-primary-500 hover:bg-primary-600 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+                Leer artículo
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-1">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+                </svg>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     
-    <!-- Forma decorativa -->
-    <div class="absolute bottom-0 left-0 right-0 h-16 bg-gray-50" style="clip-path: polygon(0 100%, 100% 100%, 100% 0);"></div>
+    <!-- Decoración inferior -->
+    <div class="absolute bottom-0 left-0 right-0 z-10">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 180" fill="#f9fafb" preserveAspectRatio="none">
+        <path d="M0,144L48,144C96,144,192,144,288,128C384,112,480,80,576,80C672,80,768,112,864,128C960,144,1056,144,1152,133.3C1248,123,1344,101,1392,90.7L1440,80L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+      </svg>
+    </div>
   </section>
+
+  <!-- Statistics Section - Nueva sección -->
+  <StatsSection />
 
   <!-- Features Section -->
   <section class="py-20 bg-gray-50">
@@ -125,7 +185,7 @@ const articlesToShow = recentArticles.length > 0
         </p>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 staggered-animation">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         {features.map((feature) => (
           <FeatureCard 
             title={feature.title} 
@@ -136,6 +196,18 @@ const articlesToShow = recentArticles.length > 0
       </div>
     </div>
   </section>
+  
+  <!-- Testimonials Section - Nueva sección -->
+  <TestimonialsSection />
+  
+  <!-- Highlight Banner Section - Nueva sección -->
+  <HighlightBanner 
+    title="Convierte tu finca en un sistema productivo y resiliente" 
+    description="Aprende cómo las prácticas agroecológicas pueden transformar tu producción agrícola y contribuir a un futuro sostenible"
+    buttonText="Conoce nuestra metodología"
+    buttonLink="/metodologia"
+    backgroundImage="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1000"
+  />
   
   <!-- Recent Articles Section -->
   <section class="py-20 bg-white">
@@ -155,7 +227,7 @@ const articlesToShow = recentArticles.length > 0
         </a>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 staggered-animation">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {articlesToShow.map((article) => (
           <ArticleCard article={article} />
         ))}
@@ -171,6 +243,15 @@ const articlesToShow = recentArticles.length > 0
       </div>
     </div>
   </section>
+  
+  <!-- Team Section - Nueva sección -->
+  <TeamSection />
+  
+  <!-- FAQ Section - Nueva sección -->
+  <FAQSection />
+  
+  <!-- Logo Cloud Section - Nueva sección -->
+  <LogoCloud />
 
   <!-- CTA Section -->
   <CTASection 
@@ -178,3 +259,12 @@ const articlesToShow = recentArticles.length > 0
     description="Mantente informado sobre las últimas tendencias en agroecología y agricultura sostenible en Colombia." 
   />
 </Layout>
+
+<style>
+  /* Asegurar que el hero tenga altura mínima en móviles */
+  @media (max-width: 768px) {
+    .min-h-\[90vh\] {
+      min-height: 700px;
+    }
+  }
+</style>

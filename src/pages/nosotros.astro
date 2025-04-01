@@ -1,0 +1,270 @@
+---
+import Layout from '../layouts/Layout.astro';
+import TeamSection from '../components/TeamSection.astro';
+---
+
+<Layout title="Nosotros - AgroEcoColombia" description="Conoce al equipo y la misión de AgroEcoColombia, líderes en agroecología y agricultura sostenible en Colombia">
+  <!-- Header de la página - Rediseñado con estilo similar a artículos -->
+  <section class="relative min-h-[400px] md:min-h-[500px] flex items-center">
+    <!-- Imagen de fondo -->
+    <div class="absolute inset-0 z-0">
+      <img 
+        src="https://images.unsplash.com/photo-1625246333195-78d9c38ad449?q=80&w=1170" 
+        alt="Equipo AgroEcoColombia" 
+        class="w-full h-full object-cover object-center brightness-[0.7]"
+      />
+      <div class="absolute inset-0 bg-gradient-to-b from-primary-900/90 via-primary-800/90 to-primary-800/90 z-10"></div>
+    </div>
+    
+    <!-- Contenido del Header -->
+    <div class="container mx-auto px-4 py-16 md:py-20 text-center relative z-20">
+      <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-display text-white animate-slide-right text-shadow-lg" data-aos="fade-up">Sobre Nosotros</h1>
+      <p class="text-xl max-w-3xl mx-auto text-white text-shadow-sm font-medium" data-aos="fade-up" data-aos-delay="100">
+        Dedicados a transformar la agricultura colombiana a través de prácticas sostenibles y conocimiento agroecológico
+      </p>
+    </div>
+    
+    <!-- Decoración inferior -->
+    <div class="absolute bottom-0 left-0 right-0 z-10">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" fill="#f9fafb" preserveAspectRatio="none">
+        <path d="M0,48L80,42.7C160,37,320,27,480,21.3C640,16,800,16,960,21.3C1120,27,1280,37,1360,42.7L1440,48L1440,48L1360,48C1280,48,1120,48,960,48C800,48,640,48,480,48C320,48,160,48,80,48L0,48Z"></path>
+      </svg>
+    </div>
+  </section>
+  
+  <!-- Misión, Visión y Valores -->
+  <section class="py-20 bg-white">
+    <div class="container mx-auto px-4">
+      <div class="max-w-5xl mx-auto">
+        <!-- Nuestra Historia -->
+        <div class="mb-16">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8 font-display text-center" data-aos="fade-up">Nuestra Historia</h2>
+          <div class="bg-gray-50 p-8 rounded-xl shadow-sm mb-12" data-aos="fade-up" data-aos-delay="100">
+            <p class="text-lg text-gray-700 leading-relaxed font-serif">
+              AgroEcoColombia nació en 2015 como respuesta a la creciente necesidad de transformar las prácticas agrícolas en Colombia hacia métodos más sostenibles y respetuosos con el medio ambiente. Lo que comenzó como un pequeño proyecto colaborativo entre agricultores, investigadores y activistas ambientales, ha crecido hasta convertirse en un referente en agroecología y agricultura sostenible en el país.
+            </p>
+            <p class="text-lg text-gray-700 leading-relaxed font-serif mt-4">
+              Hoy, nuestro equipo multidisciplinario trabaja incansablemente para promover técnicas agrícolas que respetan los ciclos naturales, fomentan la biodiversidad y promueven la soberanía alimentaria de las comunidades locales.
+            </p>
+          </div>
+          
+          <!-- Timeline mejorado -->
+          <div class="relative py-8" data-aos="fade-up" data-aos-delay="200">
+            <!-- Línea vertical central con grosor y color mejorados -->
+            <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-2 bg-primary-300 rounded-full z-0"></div>
+            
+            <!-- Eventos del timeline -->
+            <div class="relative z-10">
+              <!-- Evento 1 -->
+              <div class="flex flex-col md:flex-row items-center mb-16">
+                <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0">
+                  <span class="inline-block px-3 py-1 bg-primary-100 rounded-full text-primary-700 text-sm font-medium mb-2">2015</span>
+                  <h3 class="text-2xl font-bold text-gray-900 mb-2">Fundación</h3>
+                  <p class="text-gray-600 text-lg">Nacimiento de AgroEcoColombia como iniciativa para transformar prácticas agrícolas tradicionales.</p>
+                </div>
+                <div class="bg-primary-600 rounded-full w-10 h-10 border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                  <span class="text-white font-bold">1</span>
+                </div>
+                <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
+              </div>
+              
+              <!-- Evento 2 -->
+              <div class="flex flex-col md:flex-row items-center mb-16">
+                <div class="md:w-1/2 md:pr-12 hidden md:block"></div>
+                <div class="bg-primary-600 rounded-full w-10 h-10 border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                  <span class="text-white font-bold">2</span>
+                </div>
+                <div class="md:w-1/2 md:pl-12 mb-6 md:mb-0">
+                  <span class="inline-block px-3 py-1 bg-primary-100 rounded-full text-primary-700 text-sm font-medium mb-2">2017</span>
+                  <h3 class="text-2xl font-bold text-gray-900 mb-2">Primer Proyecto Regional</h3>
+                  <p class="text-gray-600 text-lg">Implementación de sistemas agroforestales en comunidades rurales de Antioquia.</p>
+                </div>
+              </div>
+              
+              <!-- Evento 3 -->
+              <div class="flex flex-col md:flex-row items-center mb-16">
+                <div class="md:w-1/2 md:pr-12 md:text-right mb-6 md:mb-0">
+                  <span class="inline-block px-3 py-1 bg-primary-100 rounded-full text-primary-700 text-sm font-medium mb-2">2019</span>
+                  <h3 class="text-2xl font-bold text-gray-900 mb-2">Centro de Formación</h3>
+                  <p class="text-gray-600 text-lg">Inauguración de nuestro centro de capacitación en prácticas agroecológicas.</p>
+                </div>
+                <div class="bg-primary-600 rounded-full w-10 h-10 border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                  <span class="text-white font-bold">3</span>
+                </div>
+                <div class="md:w-1/2 md:pl-12 hidden md:block"></div>
+              </div>
+              
+              <!-- Evento 4 -->
+              <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 md:pr-12 hidden md:block"></div>
+                <div class="bg-primary-600 rounded-full w-10 h-10 border-4 border-white shadow-lg z-10 flex items-center justify-center">
+                  <span class="text-white font-bold">4</span>
+                </div>
+                <div class="md:w-1/2 md:pl-12">
+                  <span class="inline-block px-3 py-1 bg-primary-100 rounded-full text-primary-700 text-sm font-medium mb-2">2022</span>
+                  <h3 class="text-2xl font-bold text-gray-900 mb-2">Reconocimiento Nacional</h3>
+                  <p class="text-gray-600 text-lg">Premio a la innovación en desarrollo rural sostenible por nuestro impacto en comunidades campesinas.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Misión y Visión -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
+          <div class="bg-gray-50 p-8 rounded-xl shadow-sm" data-aos="fade-right">
+            <div class="mb-6 text-center">
+              <div class="inline-block p-3 bg-primary-100 rounded-full text-primary-600 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 15l6-6m0 0l-6-6m6 6H9a6 6 0 000 12h3" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-2 font-display">Nuestra Misión</h3>
+            </div>
+            <p class="text-gray-700 text-lg leading-relaxed font-serif">
+              Promover la transición hacia sistemas agrícolas sostenibles y resilientes en Colombia, a través de la investigación, educación y acompañamiento técnico a comunidades rurales, contribuyendo a la soberanía alimentaria y la protección del medio ambiente.
+            </p>
+          </div>
+          
+          <div class="bg-gray-50 p-8 rounded-xl shadow-sm" data-aos="fade-left">
+            <div class="mb-6 text-center">
+              <div class="inline-block p-3 bg-primary-100 rounded-full text-primary-600 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.036 12.322a1.012 1.012 0 010-.639C3.423 7.51 7.36 4.5 12 4.5c4.638 0 8.573 3.007 9.963 7.178.07.207.07.431 0 .639C20.577 16.49 16.64 19.5 12 19.5c-4.638 0-8.573-3.007-9.963-7.178z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold text-gray-900 mb-2 font-display">Nuestra Visión</h3>
+            </div>
+            <p class="text-gray-700 text-lg leading-relaxed font-serif">
+              Ser reconocidos como líderes en la transformación agroecológica de Colombia, logrando que para 2030 al menos el 30% de los sistemas agrícolas del país implementen prácticas sostenibles, mejorando la calidad de vida de las comunidades rurales y preservando nuestros ecosistemas.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Valores -->
+        <div data-aos="fade-up">
+          <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8 font-display text-center">Nuestros Valores</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="p-6 border border-gray-100 rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow">
+              <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center text-primary-600 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Innovación</h3>
+              <p class="text-gray-600">Buscamos constantemente nuevas soluciones que combinen conocimiento tradicional con tecnologías apropiadas.</p>
+            </div>
+            
+            <div class="p-6 border border-gray-100 rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow">
+              <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center text-primary-600 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Colaboración</h3>
+              <p class="text-gray-600">Creemos en el poder del trabajo conjunto entre comunidades, académicos, organizaciones y gobiernos.</p>
+            </div>
+            
+            <div class="p-6 border border-gray-100 rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow">
+              <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center text-primary-600 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M20.893 13.393l-1.135-1.135a2.252 2.252 0 01-.421-.585l-1.08-2.16a.414.414 0 00-.663-.107.827.827 0 01-.812.21l-1.273-.363a.89.89 0 00-.738 1.595l.587.39c.59.395.674 1.23.172 1.732l-.2.2c-.212.212-.33.498-.33.796v.41c0 .409-.11.809-.32 1.158l-1.315 2.191a2.11 2.11 0 01-1.81 1.025 1.055 1.055 0 01-1.055-1.055v-1.172c0-.92-.56-1.747-1.414-2.089l-.655-.261a2.25 2.25 0 01-1.383-2.46l.007-.042a2.25 2.25 0 01.29-.787l.09-.15a2.25 2.25 0 012.37-1.048l1.178.236a1.125 1.125 0 001.302-.795l.208-.73a1.125 1.125 0 00-.578-1.315l-.665-.332-.091.091a2.25 2.25 0 01-1.591.659h-.18c-.249 0-.487.1-.662.274a.931.931 0 01-1.458-1.137l1.411-2.353a2.25 2.25 0 00.286-.76m11.928 9.869A9 9 0 008.965 3.525m11.928 9.868A9 9 0 118.965 3.525" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Sostenibilidad</h3>
+              <p class="text-gray-600">Todo nuestro trabajo se fundamenta en el respeto a los ciclos naturales y la preservación de los ecosistemas.</p>
+            </div>
+            
+            <div class="p-6 border border-gray-100 rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow">
+              <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center text-primary-600 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v17.25m0 0c-1.472 0-2.882.265-4.185.75M12 20.25c1.472 0 2.882.265 4.185.75M18.75 4.97A48.416 48.416 0 0012 4.5c-2.291 0-4.545.16-6.75.47m13.5 0c1.01.143 2.01.317 3 .52m-3-.52l2.25 2.25m-15 0l2.25-2.25m12 5.25v-5.25m0 0l-2.25 2.25m2.25-2.25l2.25 2.25" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Equidad</h3>
+              <p class="text-gray-600">Promovemos un acceso justo a recursos, conocimientos y oportunidades para todas las comunidades agrícolas.</p>
+            </div>
+            
+            <div class="p-6 border border-gray-100 rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow">
+              <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center text-primary-600 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 18.75h-9m9 0a3 3 0 013 3h-15a3 3 0 013-3m9 0v-3.375c0-.621-.503-1.125-1.125-1.125h-.871M7.5 18.75v-3.375c0-.621.504-1.125 1.125-1.125h.872m5.007 0H9.497m5.007 0a7.454 7.454 0 01-.982-3.172M9.497 14.25a7.454 7.454 0 00.981-3.172M5.25 4.236c-.982.143-1.954.317-2.916.52A6.003 6.003 0 007.73 9.728M5.25 4.236V4.5c0 2.108.966 3.99 2.48 5.228M5.25 4.236V2.721C7.456 2.41 9.71 2.25 12 2.25c2.291 0 4.545.16 6.75.47v1.516M7.73 9.728a6.726 6.726 0 002.748 1.35m8.272-6.842V4.5c0 2.108-.966 3.99-2.48 5.228m2.48-5.492a46.32 46.32 0 012.916.52 6.003 6.003 0 01-5.395 4.972m0 0a6.726 6.726 0 01-2.749 1.35m0 0a6.772 6.772 0 01-3.044 0" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Conocimiento</h3>
+              <p class="text-gray-600">Valoramos tanto el saber científico como el conocimiento ancestral de las comunidades rurales.</p>
+            </div>
+            
+            <div class="p-6 border border-gray-100 rounded-xl bg-white shadow-sm hover:shadow-md transition-shadow">
+              <div class="w-12 h-12 bg-primary-100 rounded-xl flex items-center justify-center text-primary-600 mb-4">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+                </svg>
+              </div>
+              <h3 class="text-xl font-bold text-gray-900 mb-2">Compromiso</h3>
+              <p class="text-gray-600">Dedicamos nuestro esfuerzo al bienestar de las comunidades rurales y a la construcción de un futuro sostenible.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Equipo -->
+  <TeamSection />
+  
+  <!-- CTA Contacto -->
+  <section class="py-16 bg-primary-800 text-white relative overflow-hidden">
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="text-3xl md:text-4xl font-bold mb-6 font-display" data-aos="fade-up">¿Quieres unirte a nuestra misión?</h2>
+        <p class="text-lg text-primary-100 mb-8" data-aos="fade-up" data-aos-delay="100">
+          Ya sea como voluntario, colaborador o patrocinador, hay muchas formas de contribuir a construir un futuro agroecológico para Colombia.
+        </p>
+        <a href="/contacto" class="inline-flex items-center bg-white text-primary-800 px-6 py-3 rounded-lg font-medium hover:bg-primary-50 transition-colors" data-aos="fade-up" data-aos-delay="200">
+          Contáctanos
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ml-2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+    
+    <!-- Patrones decorativos -->
+    <div class="absolute top-0 left-0 w-full h-full opacity-10 z-0">
+      <div class="absolute -top-24 -left-24 w-64 h-64 rounded-full bg-primary-600"></div>
+      <div class="absolute top-1/2 right-0 w-48 h-48 rounded-full bg-primary-600"></div>
+      <div class="absolute bottom-0 left-1/3 w-36 h-36 rounded-full bg-primary-600"></div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Animaciones para el hero */
+  @keyframes slideRight {
+    0% { opacity: 0; transform: translateX(-30px); }
+    100% { opacity: 1; transform: translateX(0); }
+  }
+  
+  .animate-slide-right {
+    animation: slideRight 0.7s ease forwards;
+  }
+  
+  /* Estilos específicos para móviles en la línea de tiempo */
+  @media (max-width: 768px) {
+    .md\:text-right {
+      text-align: center;
+    }
+  }
+  
+  /* Efecto de sombra de texto para mejorar legibilidad */
+  .text-shadow-lg {
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+  }
+  
+  .text-shadow-sm {
+    text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+</style> 

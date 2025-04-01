@@ -1,0 +1,82 @@
+---
+// Componente para mostrar testimonios de agricultores y expertos
+---
+
+<section class="py-20 bg-gray-50 overflow-hidden">
+  <div class="container mx-auto px-4">
+    <div class="text-center mb-16" data-aos="fade-up">
+      <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-display">Lo que dicen nuestros agricultores</h2>
+      <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+        Historias reales de quienes han transformado sus tierras mediante prácticas agroecológicas
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 -mx-4 px-4 pb-4 staggered-animation">
+      {/* Testimonio 1 */}
+      <div class="bg-white rounded-xl shadow-lg p-8 relative" data-aos="fade-up" data-aos-delay="100">
+        <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary-600 flex items-center justify-center rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+            <path d="M10 11h-4a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h3a1 1 0 0 1 1 1v6c0 2.667 -1.333 4.333 -4 5"></path>
+            <path d="M19 11h-4a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h3a1 1 0 0 1 1 1v6c0 2.667 -1.333 4.333 -4 5"></path>
+          </svg>
+        </div>
+        <div class="mb-6 text-gray-700 italic">
+          "Gracias a las técnicas agroecológicas, hemos reducido nuestros costos en un 40% y aumentado la diversidad de cultivos. Nuestra tierra está más viva que nunca."
+        </div>
+        <div class="flex items-center">
+          <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+            <img src="https://images.unsplash.com/photo-1597223557154-721c1cecc4b0?q=80&w=1000" alt="María Rodríguez" class="w-full h-full object-cover" />
+          </div>
+          <div>
+            <h4 class="font-bold text-gray-900">María Rodríguez</h4>
+            <p class="text-sm text-gray-600">Agricultora, Santander</p>
+          </div>
+        </div>
+      </div>
+      
+      {/* Testimonio 2 */}
+      <div class="bg-white rounded-xl shadow-lg p-8 relative" data-aos="fade-up" data-aos-delay="200">
+        <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary-600 flex items-center justify-center rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+            <path d="M10 11h-4a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h3a1 1 0 0 1 1 1v6c0 2.667 -1.333 4.333 -4 5"></path>
+            <path d="M19 11h-4a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h3a1 1 0 0 1 1 1v6c0 2.667 -1.333 4.333 -4 5"></path>
+          </svg>
+        </div>
+        <div class="mb-6 text-gray-700 italic">
+          "Implementamos sistemas agroforestales hace tres años y no solo hemos mejorado nuestros ingresos, sino que estamos restaurando el ecosistema local."
+        </div>
+        <div class="flex items-center">
+          <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+            <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1000" alt="Carlos Mendoza" class="w-full h-full object-cover" />
+          </div>
+          <div>
+            <h4 class="font-bold text-gray-900">Carlos Mendoza</h4>
+            <p class="text-sm text-gray-600">Agricultor, Cauca</p>
+          </div>
+        </div>
+      </div>
+      
+      {/* Testimonio 3 */}
+      <div class="bg-white rounded-xl shadow-lg p-8 relative" data-aos="fade-up" data-aos-delay="300">
+        <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary-600 flex items-center justify-center rounded-full">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white">
+            <path d="M10 11h-4a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h3a1 1 0 0 1 1 1v6c0 2.667 -1.333 4.333 -4 5"></path>
+            <path d="M19 11h-4a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h3a1 1 0 0 1 1 1v6c0 2.667 -1.333 4.333 -4 5"></path>
+          </svg>
+        </div>
+        <div class="mb-6 text-gray-700 italic">
+          "Después de generaciones de agricultura convencional, volver a las raíces ha sido transformador. La agroecología nos ha devuelto la salud del suelo."
+        </div>
+        <div class="flex items-center">
+          <div class="w-12 h-12 rounded-full overflow-hidden mr-4">
+            <img src="https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?q=80&w=1000" alt="Luisa Martínez" class="w-full h-full object-cover" />
+          </div>
+          <div>
+            <h4 class="font-bold text-gray-900">Luisa Martínez</h4>
+            <p class="text-sm text-gray-600">Agricultora, Antioquia</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 

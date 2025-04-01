@@ -1,0 +1,107 @@
+---
+// Componente para mostrar estadísticas sobre agroecología en Colombia
+---
+
+<section class="bg-primary-800 py-20 relative overflow-hidden">
+  <!-- Patrón decorativo de fondo -->
+  <div class="absolute inset-0 opacity-10">
+    <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80">
+      <path fill="#fff" fill-rule="evenodd" d="M0 0h20v20H0V0zm20 20h20v20H20V20zm20-20h20v20H40V0zm20 20h20v20H60V20zM0 40h20v20H0V40zm20 20h20v20H20V60zm20-20h20v20H40V40zm20 20h20v20H60V60z"/>
+    </svg>
+  </div>
+  
+  <div class="container mx-auto px-4 relative z-10">
+    <div class="text-center mb-16" data-aos="fade-up">
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4 font-display">Impacto de la agroecología</h2>
+      <p class="text-xl text-gray-100 opacity-90 max-w-3xl mx-auto">
+        La transformación agroecológica está generando resultados significativos en todo Colombia
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center staggered-animation">
+      <!-- Estadística 1 -->
+      <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 transform transition-all hover:scale-105 hover:bg-white/15" data-aos="zoom-in" data-aos-delay="100">
+        <div class="text-5xl font-bold text-white mb-2 flex justify-center items-end">
+          <span class="counter" data-target="250">0</span>
+          <span class="text-3xl">+</span>
+        </div>
+        <div class="text-primary-300 font-semibold mb-3">Comunidades impactadas</div>
+        <p class="text-gray-100 opacity-80 text-sm">En más de 20 departamentos a lo largo de todo el país</p>
+      </div>
+      
+      <!-- Estadística 2 -->
+      <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 transform transition-all hover:scale-105 hover:bg-white/15" data-aos="zoom-in" data-aos-delay="200">
+        <div class="text-5xl font-bold text-white mb-2 flex justify-center items-end">
+          <span class="counter" data-target="40">0</span>
+          <span class="text-3xl">%</span>
+        </div>
+        <div class="text-primary-300 font-semibold mb-3">Reducción de insumos</div>
+        <p class="text-gray-100 opacity-80 text-sm">Menor dependencia de insumos externos y fertilizantes químicos</p>
+      </div>
+      
+      <!-- Estadística 3 -->
+      <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 transform transition-all hover:scale-105 hover:bg-white/15" data-aos="zoom-in" data-aos-delay="300">
+        <div class="text-5xl font-bold text-white mb-2 flex justify-center items-end">
+          <span class="counter" data-target="5000">0</span>
+          <span class="text-3xl">+</span>
+        </div>
+        <div class="text-primary-300 font-semibold mb-3">Agricultores capacitados</div>
+        <p class="text-gray-100 opacity-80 text-sm">Formación en técnicas agroecológicas y sistemas sostenibles</p>
+      </div>
+      
+      <!-- Estadística 4 -->
+      <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 transform transition-all hover:scale-105 hover:bg-white/15" data-aos="zoom-in" data-aos-delay="400">
+        <div class="text-5xl font-bold text-white mb-2 flex justify-center items-end">
+          <span class="counter" data-target="35">0</span>
+          <span class="text-3xl">%</span>
+        </div>
+        <div class="text-primary-300 font-semibold mb-3">Aumento de biodiversidad</div>
+        <p class="text-gray-100 opacity-80 text-sm">Mayor presencia de especies beneficiosas en las parcelas agroecológicas</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Script para animar los contadores
+  document.addEventListener('DOMContentLoaded', () => {
+    const counters = document.querySelectorAll('.counter');
+    const speed = 200;
+    
+    function animateCounters() {
+      counters.forEach(counter => {
+        const target = +(counter.getAttribute('data-target') || '0');
+        let count = 0;
+        
+        // Calcular incremento según el tamaño del número
+        const inc = target / speed;
+        
+        const updateCount = () => {
+          if(count < target) {
+            count += inc;
+            if (counter instanceof HTMLElement) {
+              counter.innerText = Math.floor(count).toString();
+            }
+            setTimeout(updateCount, 1);
+          } else {
+            if (counter instanceof HTMLElement) {
+              counter.innerText = target.toString();
+            }
+          }
+        }
+        
+        const counterObserver = new IntersectionObserver((entries) => {
+          if(entries[0].isIntersecting) {
+            updateCount();
+            counterObserver.unobserve(counter);
+          }
+        }, { threshold: 0.5 });
+        
+        counterObserver.observe(counter);
+      });
+    }
+    
+    // Iniciar animación cuando AOS ha cargado
+    setTimeout(animateCounters, 500);
+  });
+</script> 
