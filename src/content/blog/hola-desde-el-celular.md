@@ -1,7 +1,7 @@
 ---
 title: cultivos agroecologicos
 date: 2025-04-01T15:55:00.000Z
-image: https://upload.wikimedia.org/wikipedia/commons/f/fa/Ecologically_grown_vegetables.jpg
+image: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe8fQojFgLopy2r0aCRHmQzLqBh7JTMvLa-w&s
 description: "Esto es un ejemplo desde el celular "
 category: Agricultura familiar
 tags:
