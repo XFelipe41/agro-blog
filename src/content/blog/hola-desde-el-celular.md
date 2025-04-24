@@ -1,7 +1,7 @@
 ---
-title: "Hola desde el celular "
+title: cultivos agroecologicos
 date: 2025-04-01T15:55:00.000Z
-image: /images/uploads/🔭gcamhero_20250323_171130_⌛-iphone-14-pro-max-by-gcam-hero-auto-lmc8.4-r13.jpg
+image: https://upload.wikimedia.org/wikipedia/commons/f/fa/Ecologically_grown_vegetables.jpg
 description: "Esto es un ejemplo desde el celular "
 category: Agricultura familiar
 tags:
